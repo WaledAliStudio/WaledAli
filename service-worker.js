@@ -1,12 +1,12 @@
 const CACHE_NAME = 'waledali-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/logo.png',
-  '/manifest.json',
-  '/style.css',
-  '/script.js',
+  './',
+  'index.html',
+  'offline.html',
+  'logo.png',
+  'manifest.json',
+  'style.css',
+  'script.js',
   // External resources
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
@@ -69,7 +69,7 @@ self.addEventListener('fetch', event => {
       .catch(() => {
         // If it's a navigation request, return the offline page
         if (event.request.mode === 'navigate') {
-          return caches.match('/offline.html');
+          return caches.match('offline.html');
         }
         
         // For other requests, try to get from cache
@@ -81,7 +81,7 @@ self.addEventListener('fetch', event => {
             
             // If it's an image request, return a default offline image
             if (event.request.destination === 'image') {
-              return caches.match('/logo.png');
+              return caches.match('logo.png');
             }
             
             // For other requests, return null

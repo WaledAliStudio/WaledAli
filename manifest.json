@@ -2,7 +2,7 @@
   "name": "وليد علي استديو",
   "short_name": "وليد علي",
   "description": "استديو وليد علي للتصميم والتسويق الرقمي",
-  "start_url": "/",
+  "start_url": ".",
   "scope": ".",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -24,12 +24,12 @@
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
   
-  <link rel="icon" type="image/png" href="https://www2.0zz0.com/2025/05/12/07/565820086.png">
+  <link rel="icon" type="image/png" href="logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2563eb">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="https://www2.0zz0.com/2025/05/12/07/565820086.png">
+  <link rel="apple-touch-icon" href="logo.png">
   
   <!-- PWA & Cross-Platform Meta Tags -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -37,14 +37,14 @@
   <meta name="apple-mobile-web-app-title" content="وليد علي استديو">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="msapplication-TileImage" content="https://www2.0zz0.com/2025/05/12/07/565820086.png">
+  <meta name="msapplication-TileImage" content="logo.png">
   <meta name="application-name" content="وليد علي استديو">
   <meta name="theme-color" content="#2563eb">
   <meta name="HandheldFriendly" content="true">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www2.0zz0.com/2025/05/12/07/565820086.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="https://www2.0zz0.com/2025/05/12/07/565820086.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="https://www2.0zz0.com/2025/05/12/07/565820086.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="logo.png">
   
   <style>
     :root {
@@ -1071,7 +1071,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
         try {
-          const registration = await navigator.serviceWorker.register('/service-worker.js');
+          const registration = await navigator.serviceWorker.register('service-worker.js');
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         } catch (err) {
           console.log('ServiceWorker registration failed: ', err);
