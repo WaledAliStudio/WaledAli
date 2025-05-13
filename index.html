@@ -57,6 +57,16 @@
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease;
     }
+
+    [data-theme="dark"] {
+      --primary-color: #3b82f6;
+      --primary-dark: #2563eb;
+      --text-color: #f3f4f6;
+      --text-light: #d1d5db;
+      --bg-color: #111827;
+      --white: #1f2937;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
     
     body { 
       font-family: 'Cairo', sans-serif;
@@ -64,6 +74,7 @@
       color: var(--text-color);
       background-color: var(--bg-color);
       overflow-x: hidden !important;
+      transition: var(--transition);
     }
     
     .gradient-bg {
@@ -86,6 +97,94 @@
     
     .custom-shadow {
       box-shadow: var(--shadow);
+    }
+
+    /* Dark Mode Toggle Button */
+    .theme-toggle {
+      background: var(--white);
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .theme-toggle i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+    @media (min-width: 768px) {
+      .theme-toggle {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Dark Mode Specific Styles */
+    [data-theme="dark"] .bg-white {
+      background-color: var(--white);
+    }
+
+    [data-theme="dark"] .bg-gray-50 {
+      background-color: #1a1f2e;
+    }
+
+    [data-theme="dark"] .bg-gray-100 {
+      background-color: #2d3748;
+    }
+
+    [data-theme="dark"] .text-gray-600 {
+      color: #e2e8f0;
+    }
+
+    [data-theme="dark"] .text-gray-700 {
+      color: #f8fafc;
+    }
+
+    [data-theme="dark"] .border-gray-200 {
+      border-color: #374151;
+    }
+
+    [data-theme="dark"] .glass-effect {
+      background: rgba(31, 41, 55, 0.7);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .loading {
+      background: var(--bg-color);
+    }
+
+    [data-theme="dark"] .bg-gray-900 {
+      background-color: #0f172a;
+    }
+
+    [data-theme="dark"] .text-gray-300 {
+      color: #f1f5f9;
+    }
+
+    [data-theme="dark"] .text-gray-400 {
+      color: #cbd5e1;
+    }
+
+    [data-theme="dark"] .border-gray-800 {
+      border-color: #1e293b;
+    }
+    
+    body { 
+      font-family: 'Cairo', sans-serif;
+      scroll-behavior: smooth;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      overflow-x: hidden !important;
     }
     
     .animate-float {
@@ -111,6 +210,21 @@
       align-items: center;
       z-index: 9999;
       transition: opacity 0.5s ease;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(0.95);
+      }
+    }
+
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
     /* Form Styles */
@@ -176,20 +290,117 @@
         overflow-x:hidden;
       }
     }
+
+    /* Mobile Menu Styles */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu-container {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 320px;
+      height: 100%;
+      background: var(--white);
+      z-index: 50;
+      transition: all 0.3s ease;
+      overflow-y: auto;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu-container.active {
+      right: 0;
+    }
+
+    [data-theme="dark"] .mobile-menu-container {
+      background: #1f2937;
+      border-left: 1px solid #374151;
+    }
+
+    .mobile-menu-header {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    [data-theme="dark"] .mobile-menu-header {
+      border-bottom-color: #374151;
+    }
+
+    .mobile-menu-content {
+      padding: 1rem;
+    }
+
+    .mobile-menu-item {
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      margin: 0.25rem 0;
+      transition: all 0.3s ease;
+      display: block;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .mobile-menu-item:hover {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    [data-theme="dark"] .mobile-menu-item:hover {
+      background: rgba(59, 130, 246, 0.2);
+    }
+
+    .mobile-submenu {
+      padding: 0.5rem 1rem;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    [data-theme="dark"] .mobile-submenu {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .mobile-submenu-item {
+      padding: 0.5rem 1rem;
+      display: block;
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 0.25rem;
+    }
+
+    .mobile-submenu-item:hover {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    [data-theme="dark"] .mobile-submenu-item:hover {
+      background: rgba(59, 130, 246, 0.2);
+    }
   </style>
 </head>
 <body class="bg-gray-50">
   <!-- Loading Screen -->
-  <div class="loading" id="loading" aria-hidden="true">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-600" role="status">
-      <span class="visually-hidden">جاري التحميل...</span>
-    </div>
+  <div id="loading" class="loading flex items-center justify-center">
+    <img src="logo.png" alt="وليد علي استديو" class="w-28 h-28 animate-pulse">
   </div>
-
-  <!-- Skip to Main Content -->
-  <a href="#main-content" class="visually-hidden focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600">
-    تخطي إلى المحتوى الرئيسي
-  </a>
 
   <!-- Navigation -->
   <nav class="fixed w-full z-50 bg-white shadow-sm" role="navigation" aria-label="القائمة الرئيسية">
@@ -197,8 +408,11 @@
       <div class="flex justify-between h-16 items-center">
         <div class="flex items-center">
           <a href="/" class="flex items-center" aria-label="وليد علي استديو - الصفحة الرئيسية">
-            <img src="logo.png" alt="شعار وليد علي استديو" class="max-w-[120px] md:max-w-[160px] h-auto object-contain ml-2" style="display:inline-block;vertical-align:middle;">
+            <img src="logo.png" alt="شعار وليد علي استديو" class="max-w-[120px] md:max-w-[160px] h-auto object-contain ml-2">
           </a>
+          <button id="theme-toggle" class="theme-toggle ml-2" aria-label="تبديل الوضع">
+            <i class="fas fa-moon"></i>
+          </button>
         </div>
         <!-- Desktop Links -->
         <div class="hidden md:flex items-center space-x-6 space-x-reverse">
@@ -210,66 +424,69 @@
               معرض الأعمال
               <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="min-width: 180px;">
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50">
               <a href="#work-samples" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">نماذج الأعمال</a>
               <a href="#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
               <a href="#digital-animation-apps" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
             </div>
           </div>
           <a href="#google-reviews" class="text-gray-600 hover:text-blue-600 transition">آراء العملاء</a>
-          <a href="#contact" class="btn btn-primary">ابدأ الآن</a>
+          <a href="#contact" class="btn btn-primary text-white">ابدأ الآن</a>
         </div>
         <!-- Hamburger Button -->
         <div class="md:hidden flex items-center">
           <button id="mobile-menu-btn" class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded transition">
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
         </div>
       </div>
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden transition-opacity duration-300">
-      <div class="fixed top-0 left-0 w-72 max-w-full h-full bg-white shadow-lg p-8 flex flex-col space-y-6 animate__animated animate__fadeInLeft animate__faster overflow-y-auto">
-        <button id="close-mobile-menu" class="mb-6 text-gray-700 hover:text-blue-600 focus:outline-none" style="align-self: flex-start;">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden transition-opacity duration-300">
+    <div class="fixed top-0 left-0 w-72 max-w-full h-full bg-white shadow-lg p-8 flex flex-col space-y-6 animate__animated animate__fadeInLeft animate__faster overflow-y-auto">
+      <button id="close-mobile-menu" class="mb-6 text-gray-700 hover:text-blue-600 focus:outline-none" style="align-self: flex-start;">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <a href="#hero" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الرئيسية</a>
+      <a href="#features" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">خدماتنا</a>
+      <a href="#pricing" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الأسعار</a>
+      <div>
+        <button id="mobile-works-menu-btn" class="w-full text-right text-gray-700 hover:text-blue-600 text-lg font-semibold flex items-center justify-between transition">
+          معرض الأعمال
+          <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-        <a href="#hero" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الرئيسية</a>
-        <a href="#features" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">خدماتنا</a>
-        <a href="#pricing" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الأسعار</a>
-        <div>
-          <button id="mobile-works-menu-btn" class="w-full text-right text-gray-700 hover:text-blue-600 text-lg font-semibold flex items-center justify-between transition">
-            معرض الأعمال
-            <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div id="mobile-works-submenu" class="hidden flex-col pl-4 mt-2 space-y-2">
-            <a href="#work-samples" class="block text-gray-700 hover:text-blue-600 text-base transition">نماذج الأعمال</a>
-            <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition">تصاميم السوشيال ميديا</a>
-            <a href="#digital-animation-apps" class="block text-gray-700 hover:text-blue-600 text-base transition">تطبيقات رقمية</a>
-          </div>
+        <div id="mobile-works-submenu" class="hidden flex-col pl-4 mt-2 space-y-2">
+          <a href="#work-samples" class="block text-gray-700 hover:text-blue-600 text-base transition">نماذج الأعمال</a>
+          <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition">تصاميم السوشيال ميديا</a>
+          <a href="#digital-animation-apps" class="block text-gray-700 hover:text-blue-600 text-base transition">تطبيقات رقمية</a>
         </div>
-        <a href="#google-reviews" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">آراء العملاء</a>
-        <a href="#contact" class="btn btn-primary w-full">ابدأ الآن</a>
-        <!-- PWA Installation Buttons (Mobile Only) -->
-        <div class="mt-4 pt-4 border-t border-gray-200">
-          <h3 class="text-lg font-bold text-gray-900 mb-3">تثبيت التطبيق</h3>
-          <div class="space-y-3">
-            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300">
-              <i class="fab fa-android text-xl"></i>
-              <span>تثبيت على أندرويد</span>
-            </button>
-            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300">
-              <i class="fab fa-apple text-xl"></i>
-              <span>تثبيت على iOS</span>
-            </button>
-          </div>
+      </div>
+      <a href="#google-reviews" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">آراء العملاء</a>
+      <a href="#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4">ابدأ الآن</a>
+      <!-- PWA Installation Buttons (Mobile Only) -->
+      <div class="mt-4 pt-4 border-t border-gray-200">
+        <h3 class="text-lg font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] mb-3">تثبيت التطبيق</h3>
+        <div class="space-y-3">
+          <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300">
+            <i class="fab fa-android text-xl"></i>
+            <span>تثبيت على أندرويد</span>
+          </button>
+          <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300">
+            <i class="fab fa-apple text-xl"></i>
+            <span>تثبيت على iOS</span>
+          </button>
         </div>
       </div>
     </div>
-  </nav>
+  </div>
 
   <!-- Main Content -->
   <main id="main-content" role="main">
@@ -279,7 +496,7 @@
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div class="space-y-8" data-aos="fade-left">
             <h1 class="text-5xl font-bold text-gray-900 leading-tight">
-              وليد علي استديو
+              <span class="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse">وليد علي استديو</span>
               <br>
               <span class="text-blue-600">لخدمات التسويق الرقمي المتكاملة</span>
             </h1>
@@ -290,13 +507,20 @@
               <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg transition duration-300 hover-scale text-center">
                 احصل على استشارة مجانية
               </a>
-              <a href="#features" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-4 px-8 rounded-full transition duration-300 hover-scale text-center">
+              <a href="#features" class="bg-white/90 hover:bg-white text-gray-800 font-semibold py-4 px-8 rounded-full transition duration-300 hover-scale text-center shadow-lg hover:shadow-xl border border-white/50 hover:border-white/80 backdrop-blur-sm">
                 اعرف المزيد
               </a>
             </div>
           </div>
           <div class="relative" data-aos="fade-right">
-            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="التسويق الرقمي" class="rounded-2xl shadow-2xl">
+            <div class="relative rounded-2xl shadow-2xl overflow-hidden">
+              <div class="w-full aspect-w-16 aspect-h-9">
+                <iframe class="w-full h-full min-h-[300px] md:min-h-[400px]" src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fweb.facebook.com%2FWaledAliStudio%2Fvideos%2F644503768000685&show_text=false&width=560" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+              </div>
+              <div class="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/70 to-transparent p-4">
+                <h3 class="text-white text-xl font-bold drop-shadow-lg">1000 مبيعة ب599 جنيه في أقل من 3 أيام</h3>
+              </div>
+            </div>
             <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg">
               <div class="flex items-center space-x-4 space-x-reverse">
                 <div class="text-yellow-400 text-2xl">
@@ -307,8 +531,8 @@
                   <i class="fas fa-star"></i>
                 </div>
                 <div>
-                  <p class="font-semibold">4.9 تقييم</p>
-                  <p class="text-sm text-gray-600">بناءً على أكثر من 500 عميل</p>
+                  <p class="font-semibold text-xs md:text-sm">4.9 تقييم</p>
+                  <p class="text-[10px] md:text-xs text-gray-600">بناءً على أكثر من 500 عميل</p>
                 </div>
               </div>
             </div>
@@ -448,20 +672,20 @@
           <div class="bg-white p-8 rounded-xl custom-shadow border-2 border-green-400 hover-scale animate__animated animate__fadeInUp animate__faster" data-aos="fade-up" data-aos-delay="400">
             <div class="flex items-center mb-4">
               <i class="fas fa-bullseye text-green-600 text-4xl ml-3"></i>
-              <h3 class="font-extrabold text-2xl text-gray-900">الباقة المنخفضة</h3>
+              <h3 class="font-extrabold text-2xl text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">الباقة المنخفضة</h3>
             </div>
-            <ul class="space-y-2 text-right text-gray-700 mb-4">
+            <ul class="space-y-2 text-right text-white mb-4">
               <li><i class="fas fa-bullhorn text-green-500 ml-2"></i> إدارة إعلان ممول على فيسبوك أو إنستجرام لمدة 4 إلى 7 أيام</li>
               <li><i class="fas fa-eye text-blue-500 ml-2"></i> ظهور الإعلان لا يقل عن 10,000 مرة</li>
               <li><i class="fas fa-map-marker-alt text-red-500 ml-2"></i> استهداف جغرافي دقيق داخل مصر</li>
               <li><i class="fas fa-pen-nib text-yellow-500 ml-2"></i> كتابة نص إعلاني احترافي (بدون تصميم أو فيديو)</li>
-              <li><i class="fas fa-tag text-purple-500 ml-2"></i> السعر: <span class="font-bold text-green-600">999 جنيه مصري فقط</span></li>
+              <li><i class="fas fa-tag text-purple-500 ml-2"></i> السعر: <span class="font-bold text-green-400">999 جنيه مصري فقط</span></li>
               <li><i class="fas fa-check text-blue-500 ml-2"></i> ميزة: اختبار إعلاني أولي مجاني أو مدفوع حسب الباقة</li>
             </ul>
-            <div class="mb-2 text-sm text-gray-600">
+            <div class="mb-2 text-sm text-white">
               <span class="font-bold">خدمة إنتاج المحتوى الإعلاني (اختياري) <i class='fas fa-paint-brush text-pink-400'></i>:</span> تصميم صورة واحدة أو فيديو قصير (30 ثانية) بسعر رمزي منفصل (100 - 300 جنيه)
             </div>
-            <div class="text-xs text-gray-500 mt-2 mb-4">
+            <div class="text-xs text-white mt-2 mb-4">
               <span class="font-bold">ملاحظات:</span> يمكن الترقية لاحقاً للباقات الأعلى للاستفادة من مزايا إضافية. هذه الباقة مخصصة لمحدودي الدخل والمبتدئين.
             </div>
             <a href="#contact" class="btn btn-primary w-full font-bold text-lg">ابدأ الآن</a>
@@ -470,20 +694,20 @@
           <div class="bg-white p-8 rounded-xl custom-shadow border-2 border-blue-400 hover-scale animate__animated animate__fadeInUp animate__faster" data-aos="fade-up" data-aos-delay="500">
             <div class="flex items-center mb-4">
               <i class="fas fa-rocket text-blue-600 text-4xl ml-3"></i>
-              <h3 class="font-extrabold text-2xl text-gray-900">باقة الاختبار الإعلاني</h3>
+              <h3 class="font-extrabold text-2xl text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">باقة الاختبار الإعلاني</h3>
             </div>
-            <ul class="space-y-2 text-right text-gray-700 mb-4">
+            <ul class="space-y-2 text-right text-white mb-4">
               <li><i class="fas fa-bullhorn text-green-500 ml-2"></i> إدارة إعلان ممول على فيسبوك أو إنستجرام لمدة 3 إلى 4 أيام</li>
               <li><i class="fas fa-eye text-blue-500 ml-2"></i> ظهور الإعلان لا يقل عن 3,000 مرة</li>
               <li><i class="fas fa-map-marker-alt text-red-500 ml-2"></i> استهداف جغرافي دقيق داخل مصر</li>
               <li><i class="fas fa-pen-nib text-yellow-500 ml-2"></i> كتابة نص إعلاني بسيط وجذاب (بدون تصميم أو فيديو)</li>
-              <li><i class="fas fa-tag text-purple-500 ml-2"></i> السعر: <span class="font-bold text-blue-600">يبدأ من 500 جنيه مصري فقط</span></li>
+              <li><i class="fas fa-tag text-purple-500 ml-2"></i> السعر: <span class="font-bold text-blue-400">يبدأ من 500 جنيه مصري فقط</span></li>
               <li><i class="fas fa-check text-blue-500 ml-2"></i> ميزة: اختبار إعلاني أولي مجاني أو مدفوع حسب الباقة</li>
             </ul>
-            <div class="mb-2 text-sm text-gray-600">
+            <div class="mb-2 text-sm text-white">
               <span class="font-bold">خدمة إنتاج المحتوى الإعلاني (اختياري) <i class='fas fa-paint-brush text-pink-400'></i>:</span> تصميم صورة واحدة أو فيديو قصير (30 ثانية) بسعر رمزي منفصل (100 - 300 جنيه)
             </div>
-            <div class="text-xs text-gray-500 mt-2 mb-4">
+            <div class="text-xs text-white mt-2 mb-4">
               <span class="font-bold">ملاحظات:</span> هذه الباقة مثالية للمشاريع الجديدة لاختبار السوق بأقل تكلفة. يمكن الترقية لاحقاً لباقات أعلى مع توسع المشروع.
             </div>
             <a href="#contact" class="btn btn-primary w-full font-bold text-lg">ابدأ الآن</a>
@@ -493,21 +717,21 @@
         <div class="mt-10 grid md:grid-cols-2 gap-8" data-aos="fade-up">
           <!-- Additional Video Services -->
           <div class="bg-white rounded-xl custom-shadow p-8 h-full flex flex-col">
-            <h3 class="text-2xl font-bold mb-4 text-blue-700">التعديلات الإضافية على الفيديو</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">التعديلات الإضافية على الفيديو</h3>
             <ul class="space-y-3 text-lg flex-1">
-              <li>فيديو حتى 30 ثانية: <span class="text-blue-600 font-bold">800 - 1,200 جنيه</span> (يشمل التعديلات المجانية)</li>
-              <li>فيديو حتى دقيقة: <span class="text-blue-600 font-bold">1,400 - 2,000 جنيه</span> (يشمل التعديلات المجانية)</li>
-              <li>كل 30 ثانية إضافية: <span class="text-blue-600 font-bold">600 - 900 جنيه</span> (يشمل التعديلات المجانية)</li>
-              <li>كل تعديل إضافي: <span class="text-blue-600 font-bold">10%-15%</span> من سعر الفيديو</li>
+              <li class="text-white">فيديو حتى 30 ثانية: <span class="text-blue-400 font-bold">800 - 1,200 جنيه</span> (يشمل التعديلات المجانية)</li>
+              <li class="text-white">فيديو حتى دقيقة: <span class="text-blue-400 font-bold">1,400 - 2,000 جنيه</span> (يشمل التعديلات المجانية)</li>
+              <li class="text-white">كل 30 ثانية إضافية: <span class="text-blue-400 font-bold">600 - 900 جنيه</span> (يشمل التعديلات المجانية)</li>
+              <li class="text-white">كل تعديل إضافي: <span class="text-blue-400 font-bold">10%-15%</span> من سعر الفيديو</li>
             </ul>
           </div>
           <!-- Additional Design Editing Services -->
           <div class="bg-white rounded-xl custom-shadow p-8 h-full flex flex-col">
-            <h3 class="text-2xl font-bold mb-4 text-blue-700">التعديلات الإضافية على التصميم</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">التعديلات الإضافية على التصميم</h3>
             <ul class="space-y-3 text-lg flex-1">
-              <li>كل تعديل إضافي على التصميم: <span class="text-blue-600 font-bold">10%-15%</span> من سعر التصميم</li>
-              <li>مثال: إذا كان سعر التصميم 1000 جنيه، التعديل الإضافي 100-150 جنيه</li>
-              <li>جميع الباقات تشمل التعديلات المجانية المذكورة أعلاه لكل تصميم أو فيديو</li>
+              <li class="text-white">كل تعديل إضافي على التصميم: <span class="text-blue-400 font-bold">10%-15%</span> من سعر التصميم</li>
+              <li class="text-white">مثال: إذا كان سعر التصميم 1000 جنيه، التعديل الإضافي 100-150 جنيه</li>
+              <li class="text-white">جميع الباقات تشمل التعديلات المجانية المذكورة أعلاه لكل تصميم أو فيديو</li>
             </ul>
           </div>
         </div>
@@ -767,25 +991,64 @@
   </button>
 
   <!-- PWA Install Prompt -->
-  <div id="pwa-install-prompt" class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg flex items-center justify-between px-4 py-3 animate__animated animate__fadeInUp animate__faster" style="display:none;">
+  <div id="pwa-install-prompt" class="fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-t border-gray-200 shadow-lg flex items-center justify-between px-4 py-3 animate__animated animate__fadeInUp animate__faster" style="display:none;">
     <div class="flex items-center gap-3">
-      <img src="logo.png" alt="وليد علي استديو" class="h-10 w-10 rounded mr-2">
+      <img src="logo.png" alt="وليد علي استديو" class="h-10 w-10 rounded-full mr-2 bg-white/90 p-1">
       <span class="font-bold text-blue-700">حمّل التطبيق الآن</span>
     </div>
-    <button id="close-pwa-prompt" class="text-gray-500 hover:text-red-600 text-2xl font-bold px-2">&times;</button>
+    <button id="close-pwa-prompt" class="text-gray-500 hover:text-red-600 text-2xl font-bold px-2 transition-colors duration-200">&times;</button>
   </div>
 
   <!-- Scripts -->
   <script>
+    // Dark Mode Handler
+    const darkModeHandler = {
+      init() {
+        const themeToggle = document.getElementById('theme-toggle');
+        if (!themeToggle) return;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+          this.updateIcon(savedTheme === 'dark');
+        } else {
+          // Default to light mode
+          document.documentElement.setAttribute('data-theme', 'light');
+          this.updateIcon(false);
+        }
+
+        // Remove any previous event listeners
+        themeToggle.onclick = null;
+
+        // Toggle theme on click
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          this.updateIcon(newTheme === 'dark');
+        });
+      },
+
+      updateIcon(isDark) {
+        const icon = document.querySelector('#theme-toggle i');
+        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      }
+    };
+
     // Loading Screen Handler
     const loadingScreen = {
       init() {
         window.addEventListener('load', () => {
           const loading = document.getElementById('loading');
-          loading.style.opacity = '0';
-          setTimeout(() => {
-            loading.style.display = 'none';
-          }, 500);
+          if (loading) {
+            loading.style.opacity = '0';
+            setTimeout(() => {
+              loading.style.display = 'none';
+            }, 500);
+          }
         });
       }
     };
@@ -936,6 +1199,8 @@
       formHandler.init();
       lazyLoading.init();
       smoothScroll.init();
+      darkModeHandler.init();
+      mobileMenuHandler.init();
     });
 
     // Simple Carousel Logic for Digital Animation Applications
@@ -972,36 +1237,43 @@
       });
     });
 
-    // Responsive Navbar Mobile Menu Logic
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const closeBtn = document.getElementById('close-mobile-menu');
-      if (menuBtn && mobileMenu && closeBtn) {
-        menuBtn.addEventListener('click', function() {
-          mobileMenu.classList.remove('hidden');
-          setTimeout(() => mobileMenu.classList.add('opacity-100'), 10);
+    // Mobile Menu Handler
+    const mobileMenuHandler = {
+      init() {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-mobile-menu');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const menu = document.getElementById('mobile-menu');
+        const worksBtn = document.getElementById('mobile-works-menu-btn');
+        const worksSubmenu = document.getElementById('mobile-works-submenu');
+
+        function openMenu() {
+          overlay.classList.add('active');
+          menu.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+          overlay.classList.remove('active');
+          menu.classList.remove('active');
+          document.body.style.overflow = '';
+          worksSubmenu.classList.add('hidden');
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        worksBtn.addEventListener('click', () => {
+          worksSubmenu.classList.toggle('hidden');
         });
-        closeBtn.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('opacity-100');
-        });
+
         // Close menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('opacity-100');
-          });
-        });
-        // Close menu on outside click
-        mobileMenu.addEventListener('click', function(e) {
-          if (e.target === mobileMenu) {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('opacity-100');
-          }
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', closeMenu);
         });
       }
-    });
+    };
 
     // Back to Top Button Logic
     const backToTopBtn = document.getElementById('backToTop');
@@ -1113,6 +1385,37 @@
         }
       });
     }
+
+    // Responsive Navbar Mobile Menu Logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeBtn = document.getElementById('close-mobile-menu');
+      if (menuBtn && mobileMenu && closeBtn) {
+        menuBtn.addEventListener('click', function() {
+          mobileMenu.classList.remove('hidden');
+          setTimeout(() => mobileMenu.classList.add('opacity-100'), 10);
+        });
+        closeBtn.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.classList.remove('opacity-100');
+        });
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('opacity-100');
+          });
+        });
+        // Close menu on outside click
+        mobileMenu.addEventListener('click', function(e) {
+          if (e.target === mobileMenu) {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('opacity-100');
+          }
+        });
+      }
+    });
 
   </script>
 </body>
