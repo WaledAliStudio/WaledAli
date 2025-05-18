@@ -24,6 +24,9 @@
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 
+  <!-- Main Script -->
+  <script src="script.js" defer></script>
+
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2563eb">
@@ -227,6 +230,28 @@
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
+    /* Loading Text Animation */
+    .loading-text .dot-1 {
+      animation: loadingDots 1.5s infinite;
+      animation-delay: 0s;
+    }
+
+    .loading-text .dot-2 {
+      animation: loadingDots 1.5s infinite;
+      animation-delay: 0.3s;
+    }
+
+    .loading-text .dot-3 {
+      animation: loadingDots 1.5s infinite;
+      animation-delay: 0.6s;
+    }
+
+    @keyframes loadingDots {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
     /* Form Styles */
     .form-input {
       width: 100%;
@@ -292,80 +317,24 @@
     }
 
     /* Mobile Menu Styles */
-    .mobile-menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
-      z-index: 40;
+    #mobile-menu-overlay {
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
 
-    .mobile-menu-overlay.active {
+    #mobile-menu-overlay.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .mobile-menu-container {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 85%;
-      max-width: 320px;
-      height: 100%;
-      background: var(--white);
-      z-index: 50;
-      transition: all 0.3s ease;
-      overflow-y: auto;
-      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    #mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
     }
 
-    .mobile-menu-container.active {
-      right: 0;
-    }
-
-    [data-theme="dark"] .mobile-menu-container {
-      background: #1f2937;
-      border-left: 1px solid #374151;
-    }
-
-    .mobile-menu-header {
-      padding: 1rem;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    [data-theme="dark"] .mobile-menu-header {
-      border-bottom-color: #374151;
-    }
-
-    .mobile-menu-content {
-      padding: 1rem;
-    }
-
-    .mobile-menu-item {
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-      margin: 0.25rem 0;
-      transition: all 0.3s ease;
-      display: block;
-      color: var(--text-color);
-      text-decoration: none;
-    }
-
-    .mobile-menu-item:hover {
-      background: rgba(59, 130, 246, 0.1);
-    }
-
-    [data-theme="dark"] .mobile-menu-item:hover {
-      background: rgba(59, 130, 246, 0.2);
+    #mobile-menu.translate-x-0 {
+      transform: translateX(0);
     }
 
     .mobile-submenu {
@@ -393,6 +362,16 @@
 
     [data-theme="dark"] .mobile-submenu-item:hover {
       background: rgba(59, 130, 246, 0.2);
+    }
+
+    /* Submenu Animation Styles */
+    #mobile-works-submenu {
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    #mobile-works-submenu.submenu-open {
+      opacity: 1;
     }
 
     /* Light Mode Specific Text Colors */
@@ -624,6 +603,16 @@
     /* Desktop Install Button */
     #desktop-install-btn {
       color: #ffffff !important;
+      background-color: #2563eb !important;
+      border: none !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    #desktop-install-btn:hover {
+      background-color: #1d4ed8 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
     }
 
     /* Mobile Install Buttons */
@@ -786,7 +775,14 @@
 <body class="bg-gray-50">
   <!-- Loading Screen -->
   <div id="loading" class="loading flex items-center justify-center">
-    <img src="logo.png" alt="وليد علي استديو" class="w-28 h-28 animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
+    <div class="flex flex-col items-center">
+      <div class="relative">
+        <div class="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" style="width: calc(100% + 16px); height: calc(100% + 16px); margin: -8px;"></div>
+        <img src="logo.png" alt="وليد علي استديو" class="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 relative z-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">
+      </div>
+      <div class="mt-6 text-white text-xl md:text-2xl font-bold animate-pulse">وليد علي استديو</div>
+      <div class="mt-3 text-blue-400 text-sm md:text-base loading-text">جاري التحميل<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span></div>
+    </div>
   </div>
 
   <!-- Navigation -->
@@ -811,17 +807,23 @@
               معرض الأعمال
               <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50">
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="visibility: visible;">
               <a href="#work-samples" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">موشن جرافيك دعائي</a>
               <a href="#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
-              <a href="#digital-animation-apps" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
+              <a href="digital.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
             </div>
           </div>
           <a href="#google-reviews" class="text-gray-600 hover:text-blue-600 transition">آراء العملاء</a>
+          <button id="desktop-theme-toggle" class="p-2 text-gray-600 hover:text-blue-600 focus:outline-none transition">
+            <i class="fas fa-moon"></i>
+          </button>
           <a href="#contact" class="btn btn-primary text-white">تسجيل الدخول</a>
         </div>
         <!-- Hamburger Button -->
         <div class="md:hidden flex items-center">
+          <button id="theme-toggle" class="p-2 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
+            <i class="fas fa-moon"></i>
+          </button>
           <button id="mobile-menu-btn" class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded transition">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -832,44 +834,58 @@
     </div>
   </nav>
 
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden transition-opacity duration-300">
-    <div class="fixed top-0 left-0 w-72 max-w-full h-full bg-white shadow-lg p-8 flex flex-col space-y-6 animate__animated animate__fadeInLeft animate__faster overflow-y-auto">
-      <button id="close-mobile-menu" class="mb-6 text-gray-700 hover:text-blue-600 focus:outline-none" style="align-self: flex-start;">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      <a href="#hero" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الرئيسية</a>
-      <a href="#features" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">خدماتنا</a>
-      <a href="#pricing" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الأسعار</a>
-      <div>
-        <button id="mobile-works-menu-btn" class="w-full text-right text-gray-700 hover:text-blue-600 text-lg font-semibold flex items-center justify-between transition">
-          معرض الأعمال
-          <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+  <div id="mobile-menu" class="fixed top-0 right-0 w-4/5 h-full bg-white z-50 shadow-xl overflow-y-auto transform translate-x-full transition-transform duration-300">
+    <div class="p-6 space-y-6">
+      <div class="flex justify-between items-center">
+        <a href="index.html" class="flex items-center space-x-2 space-x-reverse">
+          <img src="logo.png" alt="وليد علي استديو" class="w-10 h-10 object-contain">
+          <span class="font-bold text-xl">وليد علي استديو</span>
+        </a>
+        <button id="close-mobile-menu" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
-        <div id="mobile-works-submenu" class="hidden flex-col pl-4 mt-2 space-y-2">
-          <a href="#work-samples" class="block text-gray-700 hover:text-blue-600 text-base transition">موشن جرافيك دعائي</a>
-          <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition">تصاميم السوشيال ميديا</a>
-          <a href="#digital-animation-apps" class="block text-gray-700 hover:text-blue-600 text-base transition">تطبيقات رقمية</a>
-        </div>
       </div>
-      <a href="#google-reviews" class="text-gray-700 hover:text-blue-600 text-lg font-semibold transition">آراء العملاء</a>
-      <a href="#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4">تسجيل الدخول</a>
-      <!-- PWA Installation Buttons (Mobile Only) -->
-      <div class="mt-4 pt-4 border-t border-gray-200">
-        <h3 class="text-lg font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] mb-3">تثبيت التطبيق</h3>
-        <div class="space-y-3">
-          <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300">
-            <i class="fab fa-android text-xl"></i>
-            <span>تثبيت على أندرويد</span>
+      <div class="space-y-4">
+        <a href="#hero" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الرئيسية</a>
+        <a href="#features" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">خدماتنا</a>
+        <a href="#pricing" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الأسعار</a>
+        <div class="relative">
+          <button id="mobile-works-menu-btn" class="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 text-lg font-semibold transition">
+            معرض الأعمال
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
           </button>
-          <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300">
-            <i class="fab fa-apple text-xl"></i>
-            <span>تثبيت على iOS</span>
-          </button>
+          <div id="mobile-works-submenu" class="hidden mt-2 space-y-2 pr-4 border-r-2 border-gray-200 overflow-hidden transition-all duration-300 max-h-0" style="display: none;">
+            <div class="py-2">
+              <a href="#work-samples" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
+              <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
+              <a href="digital.html" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تطبيقات رقمية</a>
+            </div>
+          </div>
+        </div>
+        <a href="#google-reviews" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">آراء العملاء</a>
+        <a href="#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4">تسجيل الدخول</a>
+
+        <!-- PWA Installation Buttons (Mobile Only) -->
+        <div class="mt-4 pt-4 border-t border-gray-200">
+          <h3 class="text-lg font-bold text-gray-800 mb-3">تثبيت التطبيق</h3>
+          <div class="space-y-3">
+            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300">
+              <i class="fab fa-android text-xl"></i>
+              <span>تثبيت على أندرويد</span>
+            </button>
+            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300">
+              <i class="fab fa-apple text-xl"></i>
+              <span>تثبيت على iOS</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1382,38 +1398,18 @@
       });
     </script>
 
-    <!-- Digital Animation Applications Section -->
-    <section class="py-20 px-4 bg-white" id="digital-animation-apps">
+    <!-- Digital Applications Section - Redirect Banner -->
+    <section class="py-16 px-4 bg-white" id="digital-animation-apps">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">تطبيقات رقمية</h2>
-        <div class="relative" data-aos="fade-up" data-aos-delay="100">
-          <!-- Slideshow/Carousel -->
-          <div class="overflow-hidden rounded-xl custom-shadow">
-            <div id="animation-carousel" class="flex transition-transform duration-500">
-              <!-- Example Animation Items -->
-              <div class="min-w-full p-8 flex flex-col items-center justify-center">
-                <img src="https://via.placeholder.com/400x250?text=Animation+1" alt="أنيميشن 1" class="mb-4 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold mb-2">أنيميشن 1</h3>
-                <p class="text-gray-600 mb-2">وصف مختصر للعنصر المعروض للبيع.</p>
-                <button class="btn btn-primary">شراء الآن</button>
-              </div>
-              <div class="min-w-full p-8 flex flex-col items-center justify-center">
-                <img src="https://via.placeholder.com/400x250?text=Animation+2" alt="أنيميشن 2" class="mb-4 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold mb-2">أنيميشن 2</h3>
-                <p class="text-gray-600 mb-2">وصف مختصر للعنصر المعروض للبيع.</p>
-                <button class="btn btn-primary">شراء الآن</button>
-              </div>
-              <div class="min-w-full p-8 flex flex-col items-center justify-center">
-                <img src="https://via.placeholder.com/400x250?text=Animation+3" alt="أنيميشن 3" class="mb-4 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold mb-2">أنيميشن 3</h3>
-                <p class="text-gray-600 mb-2">وصف مختصر للعنصر المعروض للبيع.</p>
-                <button class="btn btn-primary">شراء الآن</button>
-              </div>
-            </div>
-          </div>
-          <!-- Carousel Arrows -->
-          <button id="carousel-prev" class="absolute top-1/2 right-4 -translate-y-1/2 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition"><i class="fas fa-chevron-right"></i></button>
-          <button id="carousel-next" class="absolute top-1/2 left-4 -translate-y-1/2 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition"><i class="fas fa-chevron-left"></i></button>
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white text-center shadow-lg" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">تطبيقات رقمية</h2>
+          <p class="text-lg mb-8 max-w-3xl mx-auto">
+            اكتشف مجموعتنا المتنوعة من التطبيقات والمنتجات الرقمية المبتكرة لتلبية احتياجات عملك وتعزيز تواجدك الرقمي
+          </p>
+          <a href="digital.html" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-50 transition duration-300 transform hover:-translate-y-1">
+            استعرض التطبيقات الرقمية
+            <i class="fas fa-arrow-left mr-2"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -1527,11 +1523,11 @@
           <div class="space-y-4">
             <h3 class="text-white text-xl font-bold mb-4">وليد علي استديو</h3>
             <p class="text-gray-400">نساعد الشركات على النمو من خلال حلول تسويق رقمي متكاملة</p>
-            <!-- Desktop Install Button (Centered) -->
+            <!-- Desktop & Smart TV Install Button (Centered) - Hidden on mobile -->
             <div class="hidden md:flex justify-center mt-6">
-              <button id="desktop-install-btn" class="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-lg transition duration-300">
+              <button id="desktop-install-btn" class="hidden md:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300 shadow-lg">
                 <i class="fas fa-download"></i>
-                <span>تثبيت التطبيق على الكمبيوتر</span>
+                <span>تثبيت التطبيق على الكمبيوتر والتلفزيون الذكي</span>
               </button>
             </div>
           </div>
@@ -1601,42 +1597,7 @@
 
   <!-- Scripts -->
   <script>
-    // Dark Mode Handler
-    const darkModeHandler = {
-      init() {
-        const themeToggle = document.getElementById('theme-toggle');
-        if (!themeToggle) return;
-        const icon = themeToggle.querySelector('i');
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          document.documentElement.setAttribute('data-theme', savedTheme);
-          this.updateIcon(savedTheme === 'dark');
-        } else {
-          // Default to light mode
-          document.documentElement.setAttribute('data-theme', 'light');
-          this.updateIcon(false);
-        }
-
-        // Remove any previous event listeners
-        themeToggle.onclick = null;
-
-        // Toggle theme on click
-        themeToggle.addEventListener('click', () => {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          this.updateIcon(newTheme === 'dark');
-        });
-      },
-
-      updateIcon(isDark) {
-        const icon = document.querySelector('#theme-toggle i');
-        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-      }
-    };
+    // Dark Mode Handler - تم نقل هذا الكود إلى ملف script.js
 
     // Loading Screen Handler
     const loadingScreen = {
@@ -1799,7 +1760,6 @@
       formHandler.init();
       lazyLoading.init();
       smoothScroll.init();
-      darkModeHandler.init();
       mobileMenuHandler.init();
     });
 
@@ -1847,26 +1807,44 @@
         const worksBtn = document.getElementById('mobile-works-menu-btn');
         const worksSubmenu = document.getElementById('mobile-works-submenu');
 
+        if (!menuBtn || !closeBtn || !overlay || !menu) {
+          console.error('Mobile menu elements not found');
+          return;
+        }
+
         function openMenu() {
-          overlay.classList.add('active');
-          menu.classList.add('active');
+          menu.classList.add('translate-x-0');
+          menu.classList.remove('translate-x-full');
+          overlay.classList.remove('hidden');
+          setTimeout(() => {
+            overlay.classList.add('active');
+          }, 10);
           document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
           overlay.classList.remove('active');
-          menu.classList.remove('active');
+          menu.classList.remove('translate-x-0');
+          menu.classList.add('translate-x-full');
+          setTimeout(() => {
+            overlay.classList.add('hidden');
+          }, 300);
           document.body.style.overflow = '';
-          worksSubmenu.classList.add('hidden');
+          if (worksSubmenu) {
+            worksSubmenu.classList.add('hidden');
+          }
         }
 
         menuBtn.addEventListener('click', openMenu);
         closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
 
-        worksBtn.addEventListener('click', () => {
-          worksSubmenu.classList.toggle('hidden');
-        });
+        if (worksBtn && worksSubmenu) {
+          worksBtn.addEventListener('click', () => {
+            worksSubmenu.classList.toggle('hidden');
+            worksBtn.querySelector('svg').classList.toggle('rotate-180');
+          });
+        }
 
         // Close menu on link click
         menu.querySelectorAll('a').forEach(link => {
@@ -1888,68 +1866,9 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // PWA Installation Handlers
-    const androidInstallBtn = document.getElementById('android-install-btn');
-    const iosInstallBtn = document.getElementById('ios-install-btn');
-    let deferredPrompt;
+    // تم نقل كود تثبيت التطبيق إلى ملف script.js
 
-    // Check if device is mobile/tablet
-    const isMobileDevice = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    };
-
-    // Handle Android Installation
-    // Always add click event to the button
-    androidInstallBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        alert('جاري تثبيت التطبيق...');
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          alert('تم بدء تثبيت التطبيق بنجاح!');
-        } else {
-          alert('لم يتم تثبيت التطبيق. يمكنك المحاولة لاحقاً.');
-        }
-        deferredPrompt = null;
-      } else {
-        alert('طريقة تثبيت التطبيق على أندرويد:\n1. افتح الموقع من متصفح Google Chrome.\n2. اضغط على زر القائمة (⋮) في أعلى المتصفح.\n3. اختر "إضافة إلى الشاشة الرئيسية" أو "تثبيت التطبيق".');
-      }
-    });
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      if (isMobileDevice()) {
-        androidInstallBtn.style.display = 'flex';
-      }
-    });
-
-    // Handle iOS Installation
-    iosInstallBtn.addEventListener('click', () => {
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-      if (isIOS) {
-        alert('لتثبيت التطبيق على iOS:\n1. اضغط على زر المشاركة في سفاري\n2. اختر "إضافة إلى الشاشة الرئيسية"');
-      } else {
-        alert('لتثبيت التطبيق على iOS:\n1. افتح الموقع في سفاري\n2. اضغط على زر المشاركة\n3. اختر "إضافة إلى الشاشة الرئيسية"');
-      }
-    });
-
-    // Hide Android button if already installed
-    window.addEventListener('appinstalled', (evt) => {
-      androidInstallBtn.style.display = 'none';
-    });
-
-    // Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
-        try {
-          const registration = await navigator.serviceWorker.register('service-worker.js');
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        } catch (err) {
-          console.log('ServiceWorker registration failed: ', err);
-        }
-      });
-    }
+    // تم نقل تسجيل Service Worker إلى ملف script.js
 
     // Mobile submenu toggle for works
     const mobileWorksMenuBtn = document.getElementById('mobile-works-menu-btn');
@@ -1960,62 +1879,9 @@
       });
     }
 
-    // زر تثبيت التطبيق على الديسكتوب
-    let deferredPromptDesktop;
-    const desktopInstallBtn = document.getElementById('desktop-install-btn');
-    if (desktopInstallBtn) {
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPromptDesktop = e;
-        // أظهر الزر فقط على الديسكتوب
-        if (window.innerWidth >= 768) {
-          desktopInstallBtn.style.display = 'flex';
-        }
-      });
-      desktopInstallBtn.addEventListener('click', async () => {
-        if (deferredPromptDesktop) {
-          deferredPromptDesktop.prompt();
-          const { outcome } = await deferredPromptDesktop.userChoice;
-          if (outcome === 'accepted') {
-            desktopInstallBtn.style.display = 'none';
-          }
-          deferredPromptDesktop = null;
-        } else {
-          alert('طريقة تثبيت التطبيق على الكمبيوتر:\n1. افتح الموقع من متصفح Chrome أو Edge.\n2. اضغط على القائمة ⋮ أو أيقونة + في شريط العنوان.\n3. اختر "تثبيت الموقع كتطبيق".');
-        }
-      });
-    }
+    // تم نقل كود تثبيت التطبيق إلى ملف script.js
 
-    // Responsive Navbar Mobile Menu Logic
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const closeBtn = document.getElementById('close-mobile-menu');
-      if (menuBtn && mobileMenu && closeBtn) {
-        menuBtn.addEventListener('click', function() {
-          mobileMenu.classList.remove('hidden');
-          setTimeout(() => mobileMenu.classList.add('opacity-100'), 10);
-        });
-        closeBtn.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('opacity-100');
-        });
-        // Close menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('opacity-100');
-          });
-        });
-        // Close menu on outside click
-        mobileMenu.addEventListener('click', function(e) {
-          if (e.target === mobileMenu) {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('opacity-100');
-          }
-        });
-      }
-    });
+    // تم نقل كود القائمة المتنقلة إلى mobileMenuHandler
 
   </script>
 </body>

@@ -5,57 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>غير متصل بالإنترنت - وليد علي استديو</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f8fafc;
+            background-color: #000000;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            color: #ffffff;
         }
 
         .offline-container {
-            background: white;
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             padding: 40px;
             text-align: center;
             max-width: 500px;
             width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 30px;
         }
 
         .logo {
-            max-width: 120px;
-            width: 100%;
-            height: auto;
+            width: 140px;
+            height: 140px;
             object-fit: contain;
-            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(0.95);
+            }
+        }
+
+        .logo-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #2563eb;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         h1 {
-            color: #1e293b;
+            color: #ffffff;
             font-size: 24px;
             margin-bottom: 16px;
             font-weight: 700;
         }
 
         p {
-            color: #64748b;
+            color: #d1d5db;
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 12px;
         }
 
         .highlight {
-            color: #0f172a;
+            color: #3b82f6;
             font-weight: 600;
         }
 
@@ -70,16 +111,80 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 24px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px auto 0;
         }
 
         .retry-button:hover {
             background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .retry-button:active {
+            transform: translateY(0);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            margin-left: 8px;
+            position: relative;
+        }
+
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 2px solid #ef4444;
+            opacity: 0;
+            animation: pulse-ring 1.5s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                opacity: 0.7;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
         }
 
         @media (max-width: 640px) {
             .offline-container {
-                padding: 24px;
+                padding: 30px 20px;
+            }
+
+            .logo-container {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 20px;
+            }
+
+            .logo {
+                width: 120px;
+                height: 120px;
             }
 
             h1 {
@@ -94,11 +199,30 @@
 </head>
 <body>
     <div class="offline-container">
-        <img src="logo.png" alt="وليد علي استديو" class="logo" style="max-width:120px;width:100%;height:auto;object-fit:contain;">
+        <div class="logo-container">
+            <div class="logo-ring"></div>
+            <img src="logo.png" alt="وليد علي استديو" class="logo">
+        </div>
         <h1>عذراً، يبدو أنك غير متصل بالإنترنت</h1>
         <p>نحن في <span class="highlight">وليد علي استديو</span> نعمل دائماً على تقديم أفضل الخدمات لعملائنا.</p>
         <p>يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</p>
-        <button class="retry-button" onclick="window.location.reload()">إعادة المحاولة</button>
+        <button class="retry-button" onclick="window.location.reload()">
+            <i class="fas fa-sync-alt"></i>
+            إعادة المحاولة
+        </button>
+        <div class="status-indicator">
+            <span>غير متصل</span>
+            <div class="status-dot"></div>
+        </div>
     </div>
+
+    <script>
+        // Check connection status periodically
+        setInterval(() => {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 5000);
+    </script>
 </body>
-</html> 
+</html>

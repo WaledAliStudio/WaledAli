@@ -32,5 +32,33 @@
       "sizes": "1920x1080",
       "type": "image/png"
     }
-  ]
+  ],
+  "splash_pages": null,
+  "shortcuts": [
+    {
+      "name": "خدماتنا",
+      "short_name": "خدمات",
+      "description": "استعرض خدماتنا",
+      "url": "/#features",
+      "icons": [{ "src": "logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "تواصل معنا",
+      "short_name": "تواصل",
+      "description": "تواصل معنا مباشرة",
+      "url": "/#contact",
+      "icons": [{ "src": "logo.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [],
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/share-target/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
