@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="وليد علي استديو - تطبيقات رقمية متنوعة لتعزيز وجودك الرقمي">
-  <meta name="keywords" content="وليد علي استديو, تطبيقات رقمية, تطبيقات جوال, تطبيقات ويب, برامج سطح المكتب">
-  <meta name="author" content="وليد علي استديو">
-  <title>تطبيقات رقمية - وليد علي استديو</title>
+  <meta name="description" content="منصة وليد علي - تطبيقات رقمية متنوعة لتعزيز وجودك الرقمي">
+  <meta name="keywords" content="منصة وليد علي, تطبيقات رقمية, تطبيقات جوال, تطبيقات ويب, برامج سطح المكتب">
+  <meta name="author" content="منصة وليد علي">
+  <title>تطبيقات رقمية - منصة وليد علي</title>
 
   <!-- Preload Critical Resources -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" as="style">
@@ -121,9 +121,90 @@
       opacity: 1;
     }
 
-    body {
+    /* Icon Rotation */
+    .rotate-180 {
+      transform: rotate(180deg);
+    }
+
+    /* Always show mobile works submenu */
+    #mobile-works-submenu {
+      display: block !important;
+      max-height: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Responsive fixes */
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
       font-family: 'Cairo', sans-serif;
       scroll-behavior: smooth;
+    }
+
+    /* Fix container width issues */
+    .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .max-w-7xl {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-6xl {
+        max-width: 72rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-5xl {
+        max-width: 64rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-4xl {
+        max-width: 56rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-3xl {
+        max-width: 48rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* Fix section padding */
+    section {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 100%;
+    }
+
+    section > div {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      section > div {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
     }
 
     .btn {
@@ -175,7 +256,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #000000;
+      background: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -216,6 +297,23 @@
       50% {
         opacity: .5;
       }
+    }
+
+    /* Dark mode loading screen */
+    [data-theme="dark"] .loading {
+      background: #111827;
+    }
+
+    [data-theme="dark"] .loading .text-gray-800 {
+      color: #f3f4f6;
+    }
+
+    [data-theme="dark"] .loading .text-blue-600 {
+      color: #60a5fa;
+    }
+
+    [data-theme="dark"] .loading img {
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
     }
 
     /* Filter Button Active State */
@@ -260,51 +358,53 @@
     <div class="flex flex-col items-center">
       <div class="relative">
         <div class="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" style="width: calc(100% + 16px); height: calc(100% + 16px); margin: -8px;"></div>
-        <img src="logo.png" alt="وليد علي استديو" class="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 relative z-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">
+        <img src="logo.png" alt="منصة وليد علي" class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.1)]">
       </div>
-      <div class="mt-6 text-white text-xl md:text-2xl font-bold animate-pulse">وليد علي استديو</div>
-      <div class="mt-3 text-blue-400 text-sm md:text-base loading-text">جاري التحميل<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span></div>
+      <div class="mt-6 text-gray-800 text-xl md:text-2xl font-bold animate-pulse">منصة وليد علي</div>
+      <div class="mt-3 text-blue-600 text-sm md:text-base loading-text">جاري التحميل<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span></div>
     </div>
   </div>
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-between items-center py-4">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center space-x-2 space-x-reverse">
-          <img src="logo.png" alt="وليد علي استديو" class="w-10 h-10 object-contain">
-          <span class="font-bold text-xl text-gray-800">وليد علي استديو</span>
-        </a>
+  <header class="fixed w-full z-50 bg-white shadow-sm" role="navigation" aria-label="القائمة الرئيسية">
+    <div class="w-full max-w-7xl mx-auto">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center" aria-label="منصة وليد علي - الصفحة الرئيسية">
+            <img src="logo.png" alt="شعار منصة وليد علي" class="max-w-[120px] md:max-w-[160px] h-auto object-contain ml-2">
+          </a>
+          <button id="theme-toggle" class="theme-toggle ml-2" aria-label="تبديل الوضع">
+            <i class="fas fa-adjust"></i>
+          </button>
+        </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-8 space-x-reverse">
-          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition">الرئيسية</a>
-          <a href="index.html#features" class="text-gray-600 hover:text-blue-600 transition">خدماتنا</a>
-          <a href="index.html#pricing" class="text-gray-600 hover:text-blue-600 transition">الأسعار</a>
-          <div class="relative group">
-            <button class="text-blue-600 font-semibold hover:text-blue-700 transition flex items-center gap-1 focus:outline-none" id="works-menu-btn">
-              معرض الأعمال
-              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="visibility: visible;">
-              <a href="index.html#work-samples" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">موشن جرافيك دعائي</a>
-              <a href="index.html#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
-              <a href="digital.html" class="block px-4 py-2 text-blue-600 font-semibold hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
-            </div>
+        <div class="hidden md:flex items-center justify-between w-full">
+          <div class="flex items-center space-x-8 space-x-reverse">
+            <!-- Removed desktop-theme-toggle button -->
           </div>
-          <a href="index.html#google-reviews" class="text-gray-600 hover:text-blue-600 transition">آراء العملاء</a>
-          <button id="desktop-theme-toggle" class="p-2 text-gray-600 hover:text-blue-600 focus:outline-none transition">
-            <i class="fas fa-moon"></i>
-          </button>
-          <a href="index.html#contact" class="btn btn-primary text-white">تسجيل الدخول</a>
+          <div class="flex items-center space-x-6 space-x-reverse">
+            <a href="index.html" class="text-gray-600 hover:text-blue-600 transition">الرئيسية</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-blue-600 transition">خدماتنا</a>
+            <a href="index.html#pricing" class="text-gray-600 hover:text-blue-600 transition">الأسعار</a>
+            <div class="relative group">
+              <button class="text-blue-600 font-semibold hover:text-blue-700 transition flex items-center gap-1 focus:outline-none" id="works-menu-btn">
+                الأعمال
+                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="visibility: visible;">
+                <a href="#digital-products" class="block px-4 py-2 text-blue-600 font-semibold hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
+                <a href="#motion-graphics" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">موشن جرافيك دعائي</a>
+                <a href="#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
+              </div>
+            </div>
+            <a href="index.html#google-reviews" class="text-gray-600 hover:text-blue-600 transition">الآراء</a>
+            <a href="index.html#contact" class="btn btn-primary text-white pt-3 pb-3 mr-4">تسجيل الدخول</a>
+          </div>
         </div>
 
         <!-- Hamburger Button -->
         <div class="md:hidden flex items-center">
-          <button id="theme-toggle" class="p-2 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
-            <i class="fas fa-moon"></i>
-          </button>
           <button id="mobile-menu-btn" class="text-gray-500 hover:text-gray-700 focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -319,13 +419,14 @@
   <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed top-0 right-0 w-4/5 h-full bg-white z-50 shadow-xl overflow-y-auto transform translate-x-full transition-transform duration-300">
+  <div id="mobile-menu" class="fixed top-0 right-0 w-[85%] max-w-sm h-full bg-white z-50 shadow-xl overflow-y-auto transform translate-x-full transition-transform duration-300">
     <div class="p-6 space-y-6">
       <div class="flex justify-between items-center">
-        <a href="index.html" class="flex items-center space-x-2 space-x-reverse">
-          <img src="logo.png" alt="وليد علي استديو" class="w-10 h-10 object-contain">
-          <span class="font-bold text-xl">وليد علي استديو</span>
-        </a>
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <img src="logo.png" alt="منصة وليد علي" class="w-12 h-12 object-contain">
+          </a>
+        </div>
         <button id="close-mobile-menu" class="text-gray-500 hover:text-gray-700 focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -333,26 +434,43 @@
         </button>
       </div>
       <div class="space-y-4">
-        <a href="index.html" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الرئيسية</a>
-        <a href="index.html#features" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">خدماتنا</a>
-        <a href="index.html#pricing" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الأسعار</a>
-        <div class="relative">
-          <button id="mobile-works-menu-btn" class="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 text-lg font-semibold transition">
-            معرض الأعمال
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="index.html" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">الرئيسية</a>
+        <a href="index.html#features" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">خدماتنا</a>
+        <a href="index.html#pricing" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">الأسعار</a>
+        <div class="relative mb-6">
+          <!-- Mobile Works Menu Button with Arrow Icon -->
+          <div class="flex items-center justify-between w-full text-blue-600 font-semibold py-2">
+            <span>الأعمال</span>
+            <svg class="w-4 h-4 transition-transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
-          </button>
-          <div id="mobile-works-submenu" class="hidden mt-2 space-y-2 pr-4 border-r-2 border-gray-200 overflow-hidden transition-all duration-300 max-h-0" style="display: none;">
+          </div>
+          <div id="mobile-works-submenu" class="mt-2 space-y-2 pr-4 border-r-2 border-gray-200">
             <div class="py-2">
-              <a href="index.html#work-samples" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
-              <a href="index.html#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
-              <a href="digital.html" class="block text-blue-600 font-semibold hover:text-blue-700 text-base transition py-2">تطبيقات رقمية</a>
+              <a href="#digital-products" class="block text-blue-600 font-semibold hover:text-blue-700 text-base transition py-2">تطبيقات رقمية</a>
+              <a href="#motion-graphics" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
+              <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
             </div>
           </div>
         </div>
-        <a href="index.html#google-reviews" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">آراء العملاء</a>
-        <a href="index.html#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4">تسجيل الدخول</a>
+        <a href="index.html#google-reviews" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2 mb-16">الآراء</a>
+        <div class="py-4"></div>
+        <a href="index.html#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4 mb-6 mt-16 pt-4 pb-4">تسجيل الدخول</a>
+
+        <!-- PWA Installation Buttons (Mobile Only) -->
+        <div class="mt-4 pt-4 border-t border-gray-200">
+          <h3 class="text-lg font-bold text-gray-800 mb-3 text-center">تثبيت التطبيق</h3>
+          <div class="space-y-3">
+            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition duration-300">
+              <i class="fab fa-android text-xl"></i>
+              <span>تثبيت على أندرويد</span>
+            </button>
+            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition duration-300">
+              <i class="fab fa-apple text-xl"></i>
+              <span>تثبيت على iOS</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -360,10 +478,10 @@
   <!-- Main Content -->
   <main id="main-content" role="main">
     <!-- Page Title Section -->
-    <section class="pt-32 pb-12 px-4 bg-gray-50">
+    <section class="pt-32 pb-20 bg-gray-50">
       <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">تطبيقات رقمية</h1>
-        <p class="text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6" data-aos="fade-up">تطبيقات رقمية</h1>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg mb-6" data-aos="fade-up" data-aos-delay="100">
           مجموعة متنوعة من التطبيقات والمنتجات الرقمية المبتكرة لتلبية احتياجات عملك وتعزيز تواجدك الرقمي
         </p>
         <nav class="mt-8 flex justify-center" aria-label="Breadcrumb" data-aos="fade-up" data-aos-delay="150">
@@ -382,15 +500,19 @@
       </div>
     </section>
 
+
+
     <!-- Digital Products Section -->
-    <section class="py-16 px-4 bg-white" id="digital-products">
+    <section class="py-16 bg-white" id="digital-products">
       <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center" data-aos="fade-up">تطبيقات رقمية</h2>
+
         <!-- Filter Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
-          <button class="filter-btn active px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition" data-filter="all">الكل</button>
-          <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition" data-filter="mobile">تطبيقات الجوال</button>
-          <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition" data-filter="web">تطبيقات الويب</button>
-          <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition" data-filter="desktop">برامج سطح المكتب</button>
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
+          <button class="filter-btn active px-4 md:px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition text-sm md:text-base" data-filter="all">الكل</button>
+          <button class="filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="mobile">تطبيقات الجوال</button>
+          <button class="filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="web">تطبيقات الويب</button>
+          <button class="filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="desktop">برامج سطح المكتب</button>
         </div>
 
         <!-- Digital Products Grid -->
@@ -580,6 +702,253 @@
         <div class="text-center mt-12">
           <button id="load-more-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
             عرض المزيد من التطبيقات
+            <i class="fas fa-chevron-down mr-2"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Motion Graphics Section -->
+    <section class="py-16 bg-gray-50" id="motion-graphics">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center" data-aos="fade-up">موشن جرافيك دعائي</h2>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
+          <button class="motion-filter-btn active px-4 md:px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition text-sm md:text-base" data-filter="all">الكل</button>
+          <button class="motion-filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="explainer">فيديوهات تعريفية</button>
+          <button class="motion-filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="ads">إعلانات</button>
+          <button class="motion-filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="intros">مقدمات</button>
+        </div>
+
+        <!-- Motion Graphics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="motion-graphics-grid" data-aos="fade-up" data-aos-delay="150">
+          <!-- Motion Graphic 1 -->
+          <div class="motion-graphic-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="explainer">
+            <div class="relative overflow-hidden group aspect-video">
+              <img src="https://cdn.dribbble.com/users/1068771/screenshots/16023076/media/f6d6eda7a038abdd55e2c3723e7f5967.jpg" alt="فيديو تعريفي للشركات" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <span class="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded-full mb-2">فيديو تعريفي</span>
+                </div>
+              </div>
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button class="play-btn bg-white/90 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center">
+                  <i class="fas fa-play text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-800">فيديو تعريفي للشركات</h3>
+              <div class="flex items-center mb-3">
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="text-gray-500 text-sm mr-2">(4.5)</span>
+              </div>
+              <p class="text-gray-600 mb-4 line-clamp-2">فيديو تعريفي احترافي يشرح خدمات ومنتجات الشركة بأسلوب جذاب وسهل الفهم.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-600 font-bold text-lg">$299.99</span>
+                <a href="index.html#contact" class="btn btn-primary py-2 px-4">طلب الخدمة</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Motion Graphic 2 -->
+          <div class="motion-graphic-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="ads">
+            <div class="relative overflow-hidden group aspect-video">
+              <img src="https://cdn.dribbble.com/users/1575908/screenshots/16022308/media/e2e2b7edd290b5e2c4363da5e7ddd23e.jpg" alt="إعلان منتج" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <span class="inline-block px-3 py-1 bg-green-600 text-white text-xs rounded-full mb-2">إعلان</span>
+                </div>
+              </div>
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button class="play-btn bg-white/90 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center">
+                  <i class="fas fa-play text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-800">إعلان منتج احترافي</h3>
+              <div class="flex items-center mb-3">
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="text-gray-500 text-sm mr-2">(5.0)</span>
+              </div>
+              <p class="text-gray-600 mb-4 line-clamp-2">إعلان جذاب لعرض منتجك بطريقة احترافية تبرز مميزاته وتحفز المشاهدين على الشراء.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-600 font-bold text-lg">$349.99</span>
+                <a href="index.html#contact" class="btn btn-primary py-2 px-4">طلب الخدمة</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Motion Graphic 3 -->
+          <div class="motion-graphic-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="intros">
+            <div class="relative overflow-hidden group aspect-video">
+              <img src="https://cdn.dribbble.com/users/1483413/screenshots/16022376/media/e1e1d7f9d1d9d8d2ecc8b181ecc7d281.jpg" alt="مقدمة فيديو" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <span class="inline-block px-3 py-1 bg-purple-600 text-white text-xs rounded-full mb-2">مقدمة</span>
+                </div>
+              </div>
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button class="play-btn bg-white/90 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center">
+                  <i class="fas fa-play text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-800">مقدمة فيديو احترافية</h3>
+              <div class="flex items-center mb-3">
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <span class="text-gray-500 text-sm mr-2">(4.0)</span>
+              </div>
+              <p class="text-gray-600 mb-4 line-clamp-2">مقدمة فيديو مميزة لقناتك على يوتيوب أو لعلامتك التجارية تعكس هويتك بشكل احترافي.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-600 font-bold text-lg">$199.99</span>
+                <a href="index.html#contact" class="btn btn-primary py-2 px-4">طلب الخدمة</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+          <button id="load-more-motion-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
+            عرض المزيد من الأعمال
+            <i class="fas fa-chevron-down mr-2"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Media Designs Section -->
+    <section class="py-16 bg-white" id="social-designs">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center" data-aos="fade-up">تصاميم السوشيال ميديا</h2>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
+          <button class="social-filter-btn active px-4 md:px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition text-sm md:text-base" data-filter="all">الكل</button>
+          <button class="social-filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="posts">منشورات</button>
+          <button class="social-filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="stories">ستوريز</button>
+          <button class="social-filter-btn px-4 md:px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm md:text-base" data-filter="covers">أغلفة</button>
+        </div>
+
+        <!-- Social Media Designs Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="social-designs-grid" data-aos="fade-up" data-aos-delay="150">
+          <!-- Social Design 1 -->
+          <div class="social-design-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="posts">
+            <div class="relative overflow-hidden group aspect-square">
+              <img src="https://cdn.dribbble.com/users/1615584/screenshots/16998073/media/f6c722a8a0f7a272f1003db8a4ded0e6.jpg" alt="تصميم منشور إعلاني" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <span class="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded-full mb-2">منشور</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-800">تصميم منشور إعلاني</h3>
+              <div class="flex items-center mb-3">
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="text-gray-500 text-sm mr-2">(4.5)</span>
+              </div>
+              <p class="text-gray-600 mb-4 line-clamp-2">تصميم منشور إعلاني جذاب لمنصات التواصل الاجتماعي يبرز منتجك أو خدمتك بشكل احترافي.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-600 font-bold text-lg">$49.99</span>
+                <a href="index.html#contact" class="btn btn-primary py-2 px-4">طلب الخدمة</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Design 2 -->
+          <div class="social-design-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="stories">
+            <div class="relative overflow-hidden group" style="aspect-ratio: 9/16;">
+              <img src="https://cdn.dribbble.com/users/1126935/screenshots/16475357/media/82d8dcb844d1e5a77c252268a3e33d52.png" alt="تصميم ستوري" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <span class="inline-block px-3 py-1 bg-green-600 text-white text-xs rounded-full mb-2">ستوري</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-800">تصميم ستوري تفاعلي</h3>
+              <div class="flex items-center mb-3">
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="text-gray-500 text-sm mr-2">(5.0)</span>
+              </div>
+              <p class="text-gray-600 mb-4 line-clamp-2">تصميم ستوري تفاعلي يجذب انتباه المتابعين ويزيد من نسبة المشاركة والتفاعل مع محتواك.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-600 font-bold text-lg">$39.99</span>
+                <a href="index.html#contact" class="btn btn-primary py-2 px-4">طلب الخدمة</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Design 3 -->
+          <div class="social-design-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="covers">
+            <div class="relative overflow-hidden group" style="aspect-ratio: 16/6;">
+              <img src="https://cdn.dribbble.com/users/1626229/screenshots/16358958/media/deb56ab4da20ec0e5c6b21d56f4d146e.jpg" alt="تصميم غلاف فيسبوك" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <span class="inline-block px-3 py-1 bg-purple-600 text-white text-xs rounded-full mb-2">غلاف</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-800">تصميم غلاف فيسبوك</h3>
+              <div class="flex items-center mb-3">
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <span class="text-gray-500 text-sm mr-2">(4.0)</span>
+              </div>
+              <p class="text-gray-600 mb-4 line-clamp-2">تصميم غلاف فيسبوك احترافي يعكس هوية علامتك التجارية ويجذب انتباه الزوار لصفحتك.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-600 font-bold text-lg">$59.99</span>
+                <a href="index.html#contact" class="btn btn-primary py-2 px-4">طلب الخدمة</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+          <button id="load-more-social-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
+            عرض المزيد من التصاميم
             <i class="fas fa-chevron-down mr-2"></i>
           </button>
         </div>
@@ -871,6 +1240,75 @@
         });
       }
 
+      // Digital Products Filter for Mobile
+      const initDigitalProductsFilter = function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.digital-product-card');
+
+        if (filterBtns.length > 0 && productCards.length > 0) {
+          console.log('Initializing digital products filter for mobile');
+
+          // Make sure all products are visible initially
+          productCards.forEach(card => {
+            card.style.display = 'block';
+          });
+
+          // Set the first button as active
+          if (filterBtns[0] && !filterBtns[0].classList.contains('active')) {
+            filterBtns[0].classList.add('active', 'bg-blue-600', 'text-white');
+            filterBtns[0].classList.remove('bg-gray-200', 'text-gray-700');
+          }
+
+          // Add click event listeners to filter buttons
+          filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+              // Remove active class from all buttons
+              filterBtns.forEach(b => {
+                b.classList.remove('active', 'bg-blue-600', 'text-white');
+                b.classList.add('bg-gray-200', 'text-gray-700');
+              });
+
+              // Add active class to clicked button
+              this.classList.add('active', 'bg-blue-600', 'text-white');
+              this.classList.remove('bg-gray-200', 'text-gray-700');
+
+              const filter = this.getAttribute('data-filter');
+              console.log(`Filtering products by: ${filter}`);
+
+              // Show/hide products based on filter
+              productCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                  card.style.display = 'block';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            });
+          });
+
+          // Load more functionality
+          const loadMoreBtn = document.getElementById('load-more-btn');
+          if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+              // Show loading state
+              this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> جاري التحميل...';
+
+              // Simulate loading delay
+              setTimeout(() => {
+                // Reset button text
+                this.innerHTML = 'عرض المزيد من التطبيقات <i class="fas fa-chevron-down mr-2"></i>';
+
+                // Show message that all products are loaded
+                alert('تم عرض جميع التطبيقات المتاحة حالياً');
+              }, 1500);
+            });
+          }
+        }
+      };
+
+      // Initialize digital products filter
+      initDigitalProductsFilter();
+
       // Hide loading screen
       const loadingScreen = document.getElementById('loading');
       if (loadingScreen) {
@@ -883,6 +1321,139 @@
           }, 500);
         });
       }
+    });
+  </script>
+
+  <!-- Additional JavaScript for Digital Products Page -->
+  <script>
+    // Make sure all functionality is initialized after page load
+    window.addEventListener('DOMContentLoaded', function() {
+      console.log('Digital products page detected, initializing all functionality');
+
+      // Handle hash links for smooth scrolling
+      function handleHashLinks() {
+        const hash = window.location.hash;
+        if (hash) {
+          const targetSection = document.querySelector(hash);
+          if (targetSection) {
+            console.log(`Found section for hash: ${hash}`);
+            setTimeout(() => {
+              targetSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }
+        }
+      }
+
+      // Wait a bit to ensure all elements are loaded
+      setTimeout(function() {
+        // Call handleHashLinks
+        handleHashLinks();
+
+        // Mobile Works Menu is now always visible by default
+        // No JavaScript manipulation needed for the menu
+        console.log('Mobile works menu is always visible by default');
+
+        // Digital Products Filter
+        initFilterFunctionality('.filter-btn', '.digital-product-card', 'data-category');
+
+        // Motion Graphics Filter
+        initFilterFunctionality('.motion-filter-btn', '.motion-graphic-card', 'data-category');
+
+        // Social Media Designs Filter
+        initFilterFunctionality('.social-filter-btn', '.social-design-card', 'data-category');
+
+        // Function to initialize filter functionality
+        function initFilterFunctionality(btnSelector, cardSelector, dataAttribute) {
+          const filterBtns = document.querySelectorAll(btnSelector);
+          const cards = document.querySelectorAll(cardSelector);
+
+          if (filterBtns.length > 0 && cards.length > 0) {
+            console.log(`Filter buttons (${btnSelector}) and cards found, setting up filter functionality`);
+
+            // Make sure all cards are visible initially
+            cards.forEach(card => {
+              card.style.display = 'block';
+            });
+
+            // Make sure the "All" button is active
+            const allBtn = document.querySelector(`${btnSelector}[data-filter="all"]`);
+            if (allBtn) {
+              allBtn.classList.add('active', 'bg-blue-600', 'text-white');
+              allBtn.classList.remove('bg-gray-200', 'text-gray-700');
+            }
+
+            // Add click event listeners to filter buttons
+            filterBtns.forEach(btn => {
+              // Remove existing event listeners to avoid duplicates
+              const newBtn = btn.cloneNode(true);
+              btn.parentNode.replaceChild(newBtn, btn);
+
+              // Add new event listener
+              newBtn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => {
+                  b.classList.remove('active', 'bg-blue-600', 'text-white');
+                  b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+
+                // Add active class to clicked button
+                this.classList.add('active', 'bg-blue-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+
+                const filter = this.getAttribute('data-filter');
+                console.log(`Filtering by: ${filter}`);
+
+                // Show/hide cards based on filter
+                cards.forEach(card => {
+                  if (filter === 'all' || card.getAttribute(dataAttribute) === filter) {
+                    card.style.display = 'block';
+                  } else {
+                    card.style.display = 'none';
+                  }
+                });
+              });
+            });
+          }
+        }
+
+        // Load More Buttons Functionality
+        setupLoadMoreButton('load-more-btn', 'تم عرض جميع التطبيقات المتاحة حالياً');
+        setupLoadMoreButton('load-more-motion-btn', 'تم عرض جميع أعمال الموشن جرافيك المتاحة حالياً');
+        setupLoadMoreButton('load-more-social-btn', 'تم عرض جميع تصاميم السوشيال ميديا المتاحة حالياً');
+
+        function setupLoadMoreButton(btnId, message) {
+          const loadMoreBtn = document.getElementById(btnId);
+          if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+              // Show loading state
+              const originalText = this.innerHTML;
+              this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> جاري التحميل...';
+
+              // Simulate loading delay
+              setTimeout(() => {
+                // Reset button text
+                this.innerHTML = originalText;
+
+                // Show message that all items are loaded
+                alert(message);
+              }, 1500);
+            });
+          }
+        }
+
+        // Play buttons for motion graphics
+        const playBtns = document.querySelectorAll('.play-btn');
+        if (playBtns.length > 0) {
+          playBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+              e.preventDefault();
+              alert('سيتم تشغيل الفيديو في النسخة النهائية من الموقع');
+            });
+          });
+        }
+
+        console.log('All functionality setup complete');
+      }, 500);
     });
   </script>
 </body>

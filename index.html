@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="وليد علي استديو - لخدمات التسويق الرقمي المتكاملة - عزز وجودك على الإنترنت">
-  <meta name="keywords" content="وليد علي استديو, تسويق رقمي, SEO, إعلانات جوجل, سوشيال ميديا">
-  <meta name="author" content="وليد علي استديو">
-  <title>وليد علي استديو - لخدمات التسويق الرقمي المتكاملة</title>
+  <meta name="description" content="منصة وليد علي - لخدمات التسويق الرقمي المتكاملة - عزز وجودك على الإنترنت">
+  <meta name="keywords" content="منصة وليد علي, تسويق رقمي, SEO, إعلانات جوجل, سوشيال ميديا">
+  <meta name="author" content="منصة وليد علي">
+  <title>منصة وليد علي - لخدمات التسويق الرقمي المتكاملة</title>
 
   <!-- Preload Critical Resources -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" as="style">
@@ -37,11 +37,11 @@
   <!-- PWA & Cross-Platform Meta Tags -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="وليد علي استديو">
+  <meta name="apple-mobile-web-app-title" content="منصة وليد علي">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="msapplication-TileColor" content="#2563eb">
   <meta name="msapplication-TileImage" content="logo.png">
-  <meta name="application-name" content="وليد علي استديو">
+  <meta name="application-name" content="منصة وليد علي">
   <meta name="theme-color" content="#2563eb">
   <meta name="HandheldFriendly" content="true">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -207,7 +207,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #000000;
+      background: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -250,6 +250,23 @@
       0% { opacity: 0; }
       50% { opacity: 1; }
       100% { opacity: 0; }
+    }
+
+    /* Dark mode loading screen */
+    [data-theme="dark"] .loading {
+      background: #111827;
+    }
+
+    [data-theme="dark"] .loading .text-gray-800 {
+      color: #f3f4f6;
+    }
+
+    [data-theme="dark"] .loading .text-blue-600 {
+      color: #60a5fa;
+    }
+
+    [data-theme="dark"] .loading img {
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
     }
 
     /* Form Styles */
@@ -308,11 +325,74 @@
       border: 0;
     }
 
-    @media only screen and (max-width: 768px){
-      html,
-      body{
-        width:100%;
-        overflow-x:hidden;
+    /* Responsive fixes */
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Fix container width issues */
+    .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .max-w-7xl {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-6xl {
+        max-width: 72rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-5xl {
+        max-width: 64rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-4xl {
+        max-width: 56rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .max-w-3xl {
+        max-width: 48rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* Fix section padding */
+    section {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 100%;
+    }
+
+    section > div {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      section > div {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
       }
     }
 
@@ -372,6 +452,19 @@
 
     #mobile-works-submenu.submenu-open {
       opacity: 1;
+    }
+
+    /* Icon Rotation */
+    .rotate-180 {
+      transform: rotate(180deg);
+    }
+
+    /* Always show mobile works submenu */
+    #mobile-works-submenu {
+      display: block !important;
+      max-height: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
 
     /* Light Mode Specific Text Colors */
@@ -778,52 +871,51 @@
     <div class="flex flex-col items-center">
       <div class="relative">
         <div class="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" style="width: calc(100% + 16px); height: calc(100% + 16px); margin: -8px;"></div>
-        <img src="logo.png" alt="وليد علي استديو" class="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 relative z-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">
+        <img src="logo.png" alt="منصة وليد علي" class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.1)]">
       </div>
-      <div class="mt-6 text-white text-xl md:text-2xl font-bold animate-pulse">وليد علي استديو</div>
-      <div class="mt-3 text-blue-400 text-sm md:text-base loading-text">جاري التحميل<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span></div>
+      <div class="mt-6 text-gray-800 text-xl md:text-2xl font-bold animate-pulse">منصة وليد علي</div>
+      <div class="mt-3 text-blue-600 text-sm md:text-base loading-text">جاري التحميل<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span></div>
     </div>
   </div>
 
   <!-- Navigation -->
   <nav class="fixed w-full z-50 bg-white shadow-sm" role="navigation" aria-label="القائمة الرئيسية">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-7xl mx-auto">
       <div class="flex justify-between h-16 items-center">
         <div class="flex items-center">
-          <a href="/" class="flex items-center" aria-label="وليد علي استديو - الصفحة الرئيسية">
-            <img src="logo.png" alt="شعار وليد علي استديو" class="max-w-[120px] md:max-w-[160px] h-auto object-contain ml-2">
+          <a href="/" class="flex items-center" aria-label="منصة وليد علي - الصفحة الرئيسية">
+            <img src="logo.png" alt="شعار منصة وليد علي" class="max-w-[120px] md:max-w-[160px] h-auto object-contain ml-2">
           </a>
           <button id="theme-toggle" class="theme-toggle ml-2" aria-label="تبديل الوضع">
-            <i class="fas fa-moon"></i>
+            <i class="fas fa-adjust"></i>
           </button>
         </div>
         <!-- Desktop Links -->
-        <div class="hidden md:flex items-center space-x-6 space-x-reverse">
-          <a href="#hero" class="text-gray-600 hover:text-blue-600 transition">الرئيسية</a>
-          <a href="#features" class="text-gray-600 hover:text-blue-600 transition">خدماتنا</a>
-          <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition">الأسعار</a>
-          <div class="relative group">
-            <button class="text-gray-600 hover:text-blue-600 transition flex items-center gap-1 focus:outline-none" id="works-menu-btn">
-              معرض الأعمال
-              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="visibility: visible;">
-              <a href="#work-samples" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">موشن جرافيك دعائي</a>
-              <a href="#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
-              <a href="digital.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
-            </div>
+        <div class="hidden md:flex items-center justify-between w-full">
+          <div class="flex items-center space-x-8 space-x-reverse">
+            <!-- Removed desktop-theme-toggle button -->
           </div>
-          <a href="#google-reviews" class="text-gray-600 hover:text-blue-600 transition">آراء العملاء</a>
-          <button id="desktop-theme-toggle" class="p-2 text-gray-600 hover:text-blue-600 focus:outline-none transition">
-            <i class="fas fa-moon"></i>
-          </button>
-          <a href="#contact" class="btn btn-primary text-white">تسجيل الدخول</a>
+          <div class="flex items-center space-x-6 space-x-reverse">
+            <a href="#hero" class="text-gray-600 hover:text-blue-600 transition">الرئيسية</a>
+            <a href="#features" class="text-gray-600 hover:text-blue-600 transition">خدماتنا</a>
+            <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition">الأسعار</a>
+            <div class="relative group">
+              <button class="text-gray-600 hover:text-blue-600 transition flex items-center gap-1 focus:outline-none" id="works-menu-btn">
+                الأعمال
+                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="visibility: visible;">
+                <a href="digital.html#motion-graphics" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">موشن جرافيك دعائي</a>
+                <a href="digital.html#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
+                <a href="digital.html#digital-products" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
+              </div>
+            </div>
+            <a href="#google-reviews" class="text-gray-600 hover:text-blue-600 transition">الآراء</a>
+            <a href="#contact" class="btn btn-primary text-white pt-3 pb-3 mr-4">تسجيل الدخول</a>
+          </div>
         </div>
         <!-- Hamburger Button -->
         <div class="md:hidden flex items-center">
-          <button id="theme-toggle" class="p-2 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
-            <i class="fas fa-moon"></i>
-          </button>
           <button id="mobile-menu-btn" class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded transition">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -838,13 +930,14 @@
   <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed top-0 right-0 w-4/5 h-full bg-white z-50 shadow-xl overflow-y-auto transform translate-x-full transition-transform duration-300">
+  <div id="mobile-menu" class="fixed top-0 right-0 w-[85%] max-w-sm h-full bg-white z-50 shadow-xl overflow-y-auto transform translate-x-full transition-transform duration-300">
     <div class="p-6 space-y-6">
       <div class="flex justify-between items-center">
-        <a href="index.html" class="flex items-center space-x-2 space-x-reverse">
-          <img src="logo.png" alt="وليد علي استديو" class="w-10 h-10 object-contain">
-          <span class="font-bold text-xl">وليد علي استديو</span>
-        </a>
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <img src="logo.png" alt="وليد علي استديو" class="w-12 h-12 object-contain">
+          </a>
+        </div>
         <button id="close-mobile-menu" class="text-gray-500 hover:text-gray-700 focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -852,36 +945,37 @@
         </button>
       </div>
       <div class="space-y-4">
-        <a href="#hero" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الرئيسية</a>
-        <a href="#features" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">خدماتنا</a>
-        <a href="#pricing" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">الأسعار</a>
-        <div class="relative">
-          <button id="mobile-works-menu-btn" class="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 text-lg font-semibold transition">
-            معرض الأعمال
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="#hero" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">الرئيسية</a>
+        <a href="#features" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">خدماتنا</a>
+        <a href="#pricing" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">الأسعار</a>
+        <div class="relative mb-6">
+          <div class="flex items-center justify-between w-full text-blue-600 font-semibold py-2">
+            <span>الأعمال</span>
+            <svg class="w-4 h-4 transition-transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
-          </button>
-          <div id="mobile-works-submenu" class="hidden mt-2 space-y-2 pr-4 border-r-2 border-gray-200 overflow-hidden transition-all duration-300 max-h-0" style="display: none;">
+          </div>
+          <div id="mobile-works-submenu" class="mt-2 space-y-2 pr-4 border-r-2 border-gray-200">
             <div class="py-2">
-              <a href="#work-samples" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
-              <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
-              <a href="digital.html" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تطبيقات رقمية</a>
+              <a href="digital.html#digital-products" class="block text-blue-600 font-semibold hover:text-blue-700 text-base transition py-2">تطبيقات رقمية</a>
+              <a href="digital.html#motion-graphics" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
+              <a href="digital.html#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
             </div>
           </div>
         </div>
-        <a href="#google-reviews" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition">آراء العملاء</a>
-        <a href="#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4">تسجيل الدخول</a>
+        <a href="#google-reviews" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2 mb-16">الآراء</a>
+        <div class="py-4"></div>
+        <a href="#contact" class="btn btn-primary w-full text-center text-white text-lg font-bold py-4 mb-6 mt-16 pt-4 pb-4">تسجيل الدخول</a>
 
         <!-- PWA Installation Buttons (Mobile Only) -->
         <div class="mt-4 pt-4 border-t border-gray-200">
-          <h3 class="text-lg font-bold text-gray-800 mb-3">تثبيت التطبيق</h3>
+          <h3 class="text-lg font-bold text-gray-800 mb-3 text-center">تثبيت التطبيق</h3>
           <div class="space-y-3">
-            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300">
+            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition duration-300">
               <i class="fab fa-android text-xl"></i>
               <span>تثبيت على أندرويد</span>
             </button>
-            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300">
+            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition duration-300">
               <i class="fab fa-apple text-xl"></i>
               <span>تثبيت على iOS</span>
             </button>
@@ -894,12 +988,12 @@
   <!-- Main Content -->
   <main id="main-content" role="main">
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 bg-white" id="hero">
+    <section class="pt-32 pb-20 bg-white" id="hero">
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div class="space-y-8" data-aos="fade-left">
             <h1 class="text-5xl font-bold text-gray-900 leading-tight">
-              <span class="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse">وليد علي استديو</span>
+              <span class="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse">منصة وليد علي</span>
               <br>
               <span class="text-blue-600">لخدمات التسويق الرقمي المتكاملة</span>
             </h1>
@@ -945,7 +1039,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 px-4 bg-gray-50">
+    <section class="py-16 bg-gray-50">
       <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div class="p-6 rounded-xl bg-white custom-shadow hover-scale" data-aos="fade-up">
@@ -977,7 +1071,7 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-20 px-4 bg-gray-50" id="features">
+    <section class="py-20 bg-gray-50" id="features">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">خدماتنا</h2>
         <div class="grid md:grid-cols-3 gap-12">
@@ -1007,7 +1101,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="py-20 px-4 bg-gray-50" id="pricing">
+    <section class="py-20 bg-gray-50" id="pricing">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">باقات إدارة خدمات السوشيال ميديا</h2>
         <div class="grid md:grid-cols-3 gap-8">
@@ -1144,208 +1238,18 @@
       </div>
     </section>
 
-    <!-- Work Samples Section -->
-    <section class="py-20 px-4 bg-white" id="work-samples">
+    <!-- Digital Products Redirect Section -->
+    <section class="py-20 bg-white" id="work-samples">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">موشن جرافيك دعائي</h2>
-        <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
-          <!-- First Row -->
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <div class="aspect-w-16 aspect-h-9 rounded-t-xl overflow-hidden">
-              <iframe src="https://www.youtube.com/embed/rq8WVic5R6E" title="موشن جرافيك 1" allowfullscreen class="w-full h-[280px]"></iframe>
-            </div>
-            <div class="p-4 bg-white">
-              <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart"></i>
-                طلب الخدمة
-              </a>
-            </div>
-          </div>
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <div class="aspect-w-16 aspect-h-9 rounded-t-xl overflow-hidden">
-              <iframe src="https://www.youtube.com/embed/CsFs9uPkIC8" title="موشن جرافيك 2" allowfullscreen class="w-full h-[280px]"></iframe>
-            </div>
-            <div class="p-4 bg-white">
-              <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart"></i>
-                طلب الخدمة
-              </a>
-            </div>
-          </div>
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <div class="aspect-w-16 aspect-h-9 rounded-t-xl overflow-hidden">
-              <iframe src="https://www.youtube.com/embed/c2L2Up6o9G0" title="موشن جرافيك 3" allowfullscreen class="w-full h-[280px]"></iframe>
-            </div>
-            <div class="p-4 bg-white">
-              <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart"></i>
-                طلب الخدمة
-              </a>
-            </div>
-          </div>
-          <!-- Second Row -->
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <div class="aspect-w-16 aspect-h-9 rounded-t-xl overflow-hidden">
-              <iframe src="https://www.youtube.com/embed/CCVy-cXYlgI" title="موشن جرافيك 4" allowfullscreen class="w-full h-[280px]"></iframe>
-            </div>
-            <div class="p-4 bg-white">
-              <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart"></i>
-                طلب الخدمة
-              </a>
-            </div>
-          </div>
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <div class="aspect-w-16 aspect-h-9 rounded-t-xl overflow-hidden">
-              <iframe src="https://www.youtube.com/embed/9XNMYCBNhAs" title="موشن جرافيك 5" allowfullscreen class="w-full h-[280px]"></iframe>
-            </div>
-            <div class="p-4 bg-white">
-              <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart"></i>
-                طلب الخدمة
-              </a>
-            </div>
-          </div>
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <div class="aspect-w-16 aspect-h-9 rounded-t-xl overflow-hidden">
-              <iframe src="https://www.youtube.com/embed/c05c7FgoVI4" title="موشن جرافيك 6" allowfullscreen class="w-full h-[280px]"></iframe>
-            </div>
-            <div class="p-4 bg-white">
-              <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart"></i>
-                طلب الخدمة
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Media Designs Section -->
-    <section class="py-20 px-4 bg-gray-50" id="social-designs">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">تصاميم السوشيال ميديا</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
-          <!-- 1 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/5dd246214199917.Y3JvcCwxNDAwLDEwOTUsMCwxMjQ.jpg" alt="تصميم 1" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 2 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/ad9220214056213.Y3JvcCwxOTk5LDE1NjQsMCww.jpg" alt="تصميم 2" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 3 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/a08409148825349.Y3JvcCwzODQwLDMwMDMsMCw0MTg.png" alt="تصميم 3" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 4 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/3dc6ba153605981.Y3JvcCwxNDAwLDEwOTUsMCwxNzM.png" alt="تصميم 4" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 5 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/f94732153386989.Y3JvcCwxMTkyLDkzMywxMDMsMA.png" alt="تصميم 5" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 6 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/674359149179259.Y3JvcCwzMzc1LDI2MzksMCwzNjc.png" alt="تصميم 6" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 7 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/754954140212457.Y3JvcCwyMzg4LDE4NjgsMCww.jpg" alt="تصميم 7" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 8 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/ddccdb140513607.Y3JvcCwxMDI0LDgwMCwwLDIyMA.png" alt="تصميم 8" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 9 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/1f67d2213269211.Y3JvcCwxMDY4LDgzNSwwLDA.png" alt="تصميم 9" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
-          <!-- 10 -->
-          <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col justify-between" style="min-height:320px;">
-            <div class="bg-gray-100 flex-1 flex items-center justify-center" style="min-height:180px;">
-              <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/4c12d0213272469.Y3JvcCwyODAwLDIxOTAsMCwzMDQ.png" alt="تصميم 10" class="w-full h-44 object-cover rounded-t-2xl" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-image text-4xl text-gray-300\'></i>'">
-            </div>
-            <div class="p-4">
-              <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 text-center flex items-center justify-center gap-2">
-                <span>طلب الخدمة</span>
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </div>
-          </div>
+        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">الأعمال</h2>
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white text-center shadow-lg" data-aos="fade-up">
+          <p class="text-lg mb-8 max-w-3xl mx-auto">
+            يمكنك الآن مشاهدة جميع أعمالنا من تطبيقات رقمية، موشن جرافيك دعائي، وتصاميم السوشيال ميديا في صفحة الأعمال
+          </p>
+          <a href="digital.html" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-50 transition duration-300 transform hover:-translate-y-1">
+            انتقل إلى الأعمال
+            <i class="fas fa-arrow-left mr-2"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -1399,7 +1303,7 @@
     </script>
 
     <!-- Digital Applications Section - Redirect Banner -->
-    <section class="py-16 px-4 bg-white" id="digital-animation-apps">
+    <section class="py-16 bg-white" id="digital-animation-apps">
       <div class="max-w-6xl mx-auto">
         <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white text-center shadow-lg" data-aos="fade-up">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">تطبيقات رقمية</h2>
@@ -1415,14 +1319,14 @@
     </section>
 
     <!-- Customer Reviews Section -->
-    <section class="py-20 px-4 bg-gray-50" id="google-reviews">
+    <section class="py-20 bg-gray-50" id="google-reviews">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">آراء العملاء</h2>
+        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">الآراء</h2>
         <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
           <!-- Example Google Review 1 -->
           <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
             <div class="flex items-center mb-2">
-              <img src="logo.png" alt="وليد علي استديو" class="max-w-[48px] md:max-w-[64px] h-auto object-contain rounded mr-2">
+              <img src="logo.png" alt="منصة وليد علي" class="max-w-[48px] md:max-w-[64px] h-auto object-contain rounded mr-2">
               <div>
                 <p class="font-bold">أحمد سمير</p>
                 <div class="flex text-yellow-400">
@@ -1434,12 +1338,12 @@
                 </div>
               </div>
             </div>
-            <p class="text-gray-700 text-center">خدمة ممتازة واحترافية. أنصح الجميع بالتعامل مع وليد علي.</p>
+            <p class="text-gray-700 text-center">خدمة ممتازة واحترافية. أنصح الجميع بالتعامل مع منصة وليد علي.</p>
           </div>
           <!-- Example Google Review 2 -->
           <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
             <div class="flex items-center mb-2">
-              <img src="logo.png" alt="وليد علي استديو" class="max-w-[48px] md:max-w-[64px] h-auto object-contain rounded mr-2">
+              <img src="logo.png" alt="منصة وليد علي" class="max-w-[48px] md:max-w-[64px] h-auto object-contain rounded mr-2">
               <div>
                 <p class="font-bold">سارة محمد</p>
                 <div class="flex text-yellow-400">
@@ -1456,7 +1360,7 @@
           <!-- Example Google Review 3 -->
           <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
             <div class="flex items-center mb-2">
-              <img src="logo.png" alt="وليد علي استديو" class="max-w-[48px] md:max-w-[64px] h-auto object-contain rounded mr-2">
+              <img src="logo.png" alt="منصة وليد علي" class="max-w-[48px] md:max-w-[64px] h-auto object-contain rounded mr-2">
               <div>
                 <p class="font-bold">محمد علي</p>
                 <div class="flex text-yellow-400">
@@ -1521,7 +1425,7 @@
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-4 gap-8">
           <div class="space-y-4">
-            <h3 class="text-white text-xl font-bold mb-4">وليد علي استديو</h3>
+            <h3 class="text-white text-xl font-bold mb-4">منصة وليد علي</h3>
             <p class="text-gray-400">نساعد الشركات على النمو من خلال حلول تسويق رقمي متكاملة</p>
             <!-- Desktop & Smart TV Install Button (Centered) - Hidden on mobile -->
             <div class="hidden md:flex justify-center mt-6">
@@ -1568,7 +1472,7 @@
           </div>
         </div>
         <div class="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p>&copy; 2025 وليد علي استديو. جميع الحقوق محفوظة.</p>
+          <p>&copy; 2025 منصة وليد علي. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
@@ -1589,7 +1493,7 @@
   <!-- PWA Install Prompt -->
   <div id="pwa-install-prompt" class="fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-t border-gray-200 shadow-lg flex items-center justify-between px-4 py-3 animate__animated animate__fadeInUp animate__faster" style="display:none;">
     <div class="flex items-center gap-3">
-      <img src="logo.png" alt="وليد علي استديو" class="h-10 w-10 rounded-full mr-2 bg-white/90 p-1">
+      <img src="logo.png" alt="منصة وليد علي" class="h-10 w-10 rounded-full mr-2 bg-white/90 p-1">
       <span class="font-bold text-blue-700">حمّل التطبيق الآن</span>
     </div>
     <button id="close-pwa-prompt" class="text-gray-500 hover:text-red-600 text-2xl font-bold px-2 transition-colors duration-200">&times;</button>
@@ -1870,14 +1774,9 @@
 
     // تم نقل تسجيل Service Worker إلى ملف script.js
 
-    // Mobile submenu toggle for works
-    const mobileWorksMenuBtn = document.getElementById('mobile-works-menu-btn');
-    const mobileWorksSubmenu = document.getElementById('mobile-works-submenu');
-    if (mobileWorksMenuBtn && mobileWorksSubmenu) {
-      mobileWorksMenuBtn.addEventListener('click', () => {
-        mobileWorksSubmenu.classList.toggle('hidden');
-      });
-    }
+    // Mobile Works Menu is now always visible by default
+    // No JavaScript manipulation needed for the menu
+    console.log('Mobile works menu is always visible by default');
 
     // تم نقل كود تثبيت التطبيق إلى ملف script.js
 

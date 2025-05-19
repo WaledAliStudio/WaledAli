@@ -167,27 +167,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Dark Mode Toggle
   const darkModeHandler = {
     init() {
-      const mobileThemeToggle = document.getElementById('theme-toggle');
-      const desktopThemeToggle = document.getElementById('desktop-theme-toggle');
+      const themeToggle = document.getElementById('theme-toggle');
       const htmlElement = document.documentElement;
 
       // Check for saved theme preference or use preferred color scheme
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      // Function to update theme toggle buttons
-      const updateThemeButtons = (isDark) => {
-        const icon = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      // Function to update theme toggle button
+      const updateThemeButton = (isDark) => {
+        const icon = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-adjust"></i>';
 
-        if (mobileThemeToggle) {
-          mobileThemeToggle.innerHTML = icon;
+        if (themeToggle) {
+          themeToggle.innerHTML = icon;
         }
 
-        if (desktopThemeToggle) {
-          desktopThemeToggle.innerHTML = icon;
-        }
-
-        console.log(`Theme icons updated to ${isDark ? 'sun' : 'moon'}`);
+        console.log(`Theme icon updated to ${isDark ? 'sun' : 'adjust'}`);
       };
 
       // Function to toggle theme
@@ -199,36 +194,26 @@ document.addEventListener('DOMContentLoaded', () => {
         htmlElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
 
-        updateThemeButtons(newTheme === 'dark');
+        updateThemeButton(newTheme === 'dark');
       };
 
       // Set initial theme
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         htmlElement.setAttribute('data-theme', 'dark');
-        updateThemeButtons(true);
+        updateThemeButton(true);
       } else {
         htmlElement.setAttribute('data-theme', 'light');
-        updateThemeButtons(false);
+        updateThemeButton(false);
       }
 
-      // Setup mobile theme toggle
-      if (mobileThemeToggle) {
+      // Setup theme toggle
+      if (themeToggle) {
         // Remove any previous event listeners to avoid duplicates
-        const newMobileToggle = mobileThemeToggle.cloneNode(true);
-        mobileThemeToggle.parentNode.replaceChild(newMobileToggle, mobileThemeToggle);
+        const newThemeToggle = themeToggle.cloneNode(true);
+        themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
 
         // Add click event listener
-        newMobileToggle.addEventListener('click', toggleTheme);
-      }
-
-      // Setup desktop theme toggle
-      if (desktopThemeToggle) {
-        // Remove any previous event listeners to avoid duplicates
-        const newDesktopToggle = desktopThemeToggle.cloneNode(true);
-        desktopThemeToggle.parentNode.replaceChild(newDesktopToggle, desktopThemeToggle);
-
-        // Add click event listener
-        newDesktopToggle.addEventListener('click', toggleTheme);
+        newThemeToggle.addEventListener('click', toggleTheme);
       }
     }
   };
@@ -349,15 +334,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const newIOSBtn = iosInstallBtn.cloneNode(true);
         iosInstallBtn.parentNode.replaceChild(newIOSBtn, iosInstallBtn);
 
-        if (isIOS) {
-          newIOSBtn.style.display = 'flex';
+        // Always show iOS button in mobile menu
+        newIOSBtn.style.display = 'flex';
 
-          newIOSBtn.addEventListener('click', () => {
-            alert('لتثبيت التطبيق على iOS:\n1. اضغط على زر المشاركة (Share) أسفل المتصفح\n2. قم بالتمرير للأسفل واضغط على "إضافة إلى الشاشة الرئيسية"');
-          });
-        } else {
-          newIOSBtn.style.display = 'none';
-        }
+        newIOSBtn.addEventListener('click', () => {
+          alert('لتثبيت التطبيق على iOS:\n1. اضغط على زر المشاركة (Share) أسفل المتصفح\n2. قم بالتمرير للأسفل واضغط على "إضافة إلى الشاشة الرئيسية"');
+        });
       }
 
       // Setup Desktop and Smart TV installation
