@@ -72,69 +72,66 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeMobileMenu = document.getElementById('close-mobile-menu');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+  function openMobileMenu() {
+    mobileMenu.classList.add('translate-x-0');
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenuOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('translate-x-0');
+    mobileMenu.classList.add('translate-x-full');
+    setTimeout(() => {
+      mobileMenuOverlay.classList.add('hidden');
+    }, 300);
+    document.body.style.overflow = '';
+  }
 
   if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.add('block');
-      mobileMenu.classList.remove('hidden');
-    });
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
   }
 
   if (closeMobileMenu && mobileMenu) {
-    closeMobileMenu.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      mobileMenu.classList.remove('block');
+    closeMobileMenu.addEventListener('click', closeMobileMenu);
+  }
+
+  if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+  }
+
+  // Close menu when clicking on links
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
     });
   }
 
-  // Mobile Works Submenu Toggle with Animation
-  const mobileWorksMenuBtn = document.getElementById('mobile-works-menu-btn');
-  const mobileWorksSubmenu = document.getElementById('mobile-works-submenu');
+  // Mobile Works Submenu - Always visible
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileWorksMenuBtns = document.querySelectorAll('.relative.mb-6 > div:first-child');
 
-  if (mobileWorksMenuBtn && mobileWorksSubmenu) {
-    mobileWorksMenuBtn.addEventListener('click', () => {
-      console.log('Mobile works menu button clicked');
+    mobileWorksMenuBtns.forEach(btn => {
+      if (btn) {
+        const submenu = btn.nextElementSibling;
+        if (submenu && submenu.id === 'mobile-works-submenu') {
+          // Make sure the arrow is rotated to indicate the menu is open
+          const arrowIcon = btn.querySelector('svg');
+          if (arrowIcon) {
+            arrowIcon.classList.add('rotate-180');
+          }
 
-      // Toggle rotation for the arrow icon
-      mobileWorksMenuBtn.querySelector('svg').classList.toggle('rotate-180');
-
-      // Check if submenu is currently closed
-      const isClosed = mobileWorksSubmenu.classList.contains('hidden') ||
-                      mobileWorksSubmenu.style.display === 'none' ||
-                      mobileWorksSubmenu.style.display === '';
-
-      if (isClosed) {
-        // First make it visible but with height 0
-        mobileWorksSubmenu.classList.remove('hidden');
-        mobileWorksSubmenu.style.display = 'block';
-        mobileWorksSubmenu.style.maxHeight = '0';
-
-        // Force a reflow to ensure the transition works
-        void mobileWorksSubmenu.offsetHeight;
-
-        // Then animate to the actual height
-        const height = mobileWorksSubmenu.scrollHeight;
-        mobileWorksSubmenu.style.maxHeight = `${height}px`;
-
-        // Add animation class
-        mobileWorksSubmenu.classList.add('submenu-open');
-
-        console.log(`Opening submenu with height: ${height}px`);
-      } else {
-        // Animate to height 0
-        mobileWorksSubmenu.style.maxHeight = '0';
-        mobileWorksSubmenu.classList.remove('submenu-open');
-
-        // After animation completes, hide the element
-        setTimeout(() => {
-          mobileWorksSubmenu.classList.add('hidden');
-          mobileWorksSubmenu.style.display = 'none';
-        }, 300); // Match this with the CSS transition duration
-
-        console.log('Closing submenu');
+          // Make sure submenu is always visible
+          submenu.style.display = 'block';
+          submenu.style.maxHeight = 'none';
+          submenu.style.opacity = '1';
+          submenu.style.visibility = 'visible';
+        }
       }
     });
-  }
+  });
 
   // Desktop Works Submenu Hover Effect
   const worksMenuBtn = document.getElementById('works-menu-btn');
@@ -167,22 +164,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Dark Mode Toggle
   const darkModeHandler = {
     init() {
-      const themeToggle = document.getElementById('theme-toggle');
+      // Get all theme toggle buttons (there might be multiple in the page)
+      const themeToggles = document.querySelectorAll('#theme-toggle');
       const htmlElement = document.documentElement;
 
       // Check for saved theme preference or use preferred color scheme
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      // Function to update theme toggle button
-      const updateThemeButton = (isDark) => {
+      // Function to update all theme toggle buttons
+      const updateThemeButtons = (isDark) => {
         const icon = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-adjust"></i>';
 
-        if (themeToggle) {
-          themeToggle.innerHTML = icon;
-        }
+        themeToggles.forEach(toggle => {
+          if (toggle) {
+            toggle.innerHTML = icon;
+          }
+        });
 
-        console.log(`Theme icon updated to ${isDark ? 'sun' : 'adjust'}`);
+        console.log(`Theme icons updated to ${isDark ? 'sun' : 'adjust'}`);
       };
 
       // Function to toggle theme
@@ -194,27 +194,41 @@ document.addEventListener('DOMContentLoaded', () => {
         htmlElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
 
-        updateThemeButton(newTheme === 'dark');
+        updateThemeButtons(newTheme === 'dark');
       };
 
       // Set initial theme
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         htmlElement.setAttribute('data-theme', 'dark');
-        updateThemeButton(true);
+        updateThemeButtons(true);
       } else {
         htmlElement.setAttribute('data-theme', 'light');
-        updateThemeButton(false);
+        updateThemeButtons(false);
       }
 
-      // Setup theme toggle
-      if (themeToggle) {
-        // Remove any previous event listeners to avoid duplicates
-        const newThemeToggle = themeToggle.cloneNode(true);
-        themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
+      // Setup theme toggle buttons
+      themeToggles.forEach(toggle => {
+        if (toggle) {
+          // Remove any previous event listeners to avoid duplicates
+          const newToggle = toggle.cloneNode(true);
+          toggle.parentNode.replaceChild(newToggle, toggle);
 
-        // Add click event listener
-        newThemeToggle.addEventListener('click', toggleTheme);
-      }
+          // Add click event listener
+          newToggle.addEventListener('click', toggleTheme);
+
+          // Make sure the button is visible and clickable
+          newToggle.style.pointerEvents = 'auto';
+          newToggle.style.cursor = 'pointer';
+        }
+      });
+
+      // Add direct event listener to document for theme toggle buttons
+      document.addEventListener('click', function(e) {
+        if (e.target && (e.target.id === 'theme-toggle' || e.target.closest('#theme-toggle'))) {
+          console.log('Theme toggle clicked via document event listener');
+          toggleTheme();
+        }
+      });
     }
   };
 

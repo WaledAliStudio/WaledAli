@@ -97,18 +97,125 @@
       color: var(--gray-300);
     }
 
-    [data-theme="dark"] .digital-product-card {
+    /* Ensure smooth transition between themes */
+    body,
+    header,
+    #mobile-menu,
+    .bg-white,
+    .bg-gray-50,
+    .text-gray-800,
+    .text-gray-700,
+    .text-gray-600,
+    .digital-product-card,
+    .motion-graphic-card,
+    .social-design-card,
+    .filter-btn,
+    .motion-filter-btn,
+    .social-filter-btn,
+    .btn-primary,
+    .theme-toggle,
+    .theme-toggle i {
+      transition: all 0.3s ease;
+    }
+
+    /* Card Styles in Dark Mode */
+    [data-theme="dark"] .digital-product-card,
+    [data-theme="dark"] .motion-graphic-card,
+    [data-theme="dark"] .social-design-card {
       background-color: var(--gray-800);
       border: 1px solid var(--gray-700);
     }
 
-    [data-theme="dark"] .filter-btn:not(.active) {
+    /* Card Text in Dark Mode */
+    [data-theme="dark"] .digital-product-card h3,
+    [data-theme="dark"] .motion-graphic-card h3,
+    [data-theme="dark"] .social-design-card h3,
+    [data-theme="dark"] h2,
+    [data-theme="dark"] h3,
+    [data-theme="dark"] h4 {
+      color: var(--gray-100);
+    }
+
+    [data-theme="dark"] .digital-product-card p,
+    [data-theme="dark"] .motion-graphic-card p,
+    [data-theme="dark"] .social-design-card p,
+    [data-theme="dark"] p {
+      color: var(--gray-400);
+    }
+
+    /* Star Ratings in Dark Mode */
+    [data-theme="dark"] .text-yellow-400 {
+      color: #fbbf24;
+    }
+
+    /* Text in Dark Mode */
+    [data-theme="dark"] .text-gray-500 {
+      color: #9ca3af;
+    }
+
+    /* Section Titles in Dark Mode */
+    [data-theme="dark"] .text-center.mb-8 {
+      color: var(--gray-100);
+    }
+
+    /* Filter Buttons in Dark Mode */
+    [data-theme="dark"] .filter-btn:not(.active),
+    [data-theme="dark"] .motion-filter-btn:not(.active),
+    [data-theme="dark"] .social-filter-btn:not(.active) {
       background-color: var(--gray-700);
       color: var(--gray-300);
     }
 
-    [data-theme="dark"] .filter-btn:not(.active):hover {
+    [data-theme="dark"] .filter-btn:not(.active):hover,
+    [data-theme="dark"] .motion-filter-btn:not(.active):hover,
+    [data-theme="dark"] .social-filter-btn:not(.active):hover {
       background-color: var(--gray-600);
+    }
+
+    /* Play Button in Dark Mode */
+    [data-theme="dark"] .play-btn {
+      background-color: rgba(31, 41, 55, 0.9);
+      color: var(--primary-color);
+    }
+
+    /* Mobile Menu in Dark Mode */
+    [data-theme="dark"] #mobile-works-submenu {
+      border-color: var(--gray-700);
+    }
+
+    /* Footer in Dark Mode */
+    [data-theme="dark"] footer {
+      background-color: var(--gray-900);
+      border-top: 1px solid var(--gray-800);
+    }
+
+    /* Price in Dark Mode */
+    [data-theme="dark"] .text-blue-600 {
+      color: #60a5fa;
+    }
+
+    /* Button in Dark Mode */
+    [data-theme="dark"] .btn-primary {
+      background-color: var(--primary-color);
+      color: white !important;
+    }
+
+    [data-theme="dark"] .btn-primary:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Load More Button in Dark Mode */
+    [data-theme="dark"] #load-more-btn,
+    [data-theme="dark"] #load-more-motion-btn,
+    [data-theme="dark"] #load-more-social-btn {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    [data-theme="dark"] #load-more-btn:hover,
+    [data-theme="dark"] #load-more-motion-btn:hover,
+    [data-theme="dark"] #load-more-social-btn:hover {
+      background-color: var(--secondary-color);
     }
 
     /* Submenu Animation Styles */
@@ -126,7 +233,7 @@
       transform: rotate(180deg);
     }
 
-    /* Always show mobile works submenu */
+    /* Mobile works submenu animation */
     #mobile-works-submenu {
       display: block !important;
       max-height: none !important;
@@ -224,6 +331,79 @@
 
     .custom-shadow {
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Dark Mode Toggle Button */
+    .theme-toggle {
+      background: var(--white);
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer !important;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      z-index: 100;
+      pointer-events: auto !important;
+      position: relative;
+      overflow: visible;
+    }
+
+    .theme-toggle::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      bottom: -10px;
+      left: -10px;
+      z-index: -1;
+    }
+
+    .theme-toggle i {
+      font-size: 1.4rem;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+      .theme-toggle {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      background-color: var(--primary-color);
+    }
+
+    .theme-toggle:hover i {
+      color: var(--white);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.95);
+    }
+
+    [data-theme="dark"] .theme-toggle {
+      background-color: var(--gray-800);
+      border-color: var(--primary-color);
+    }
+
+    [data-theme="dark"] .theme-toggle i {
+      color: #60a5fa;
+    }
+
+    [data-theme="dark"] .theme-toggle:hover {
+      background-color: var(--primary-color);
+    }
+
+    [data-theme="dark"] .theme-toggle:hover i {
+      color: var(--white);
     }
 
     .hover-scale {
@@ -439,17 +619,17 @@
         <a href="index.html#pricing" class="block text-gray-700 hover:text-blue-600 text-lg font-semibold transition py-2">الأسعار</a>
         <div class="relative mb-6">
           <!-- Mobile Works Menu Button with Arrow Icon -->
-          <div class="flex items-center justify-between w-full text-blue-600 font-semibold py-2">
+          <div class="flex items-center justify-between w-full text-blue-600 font-semibold py-2 cursor-pointer">
             <span>الأعمال</span>
-            <svg class="w-4 h-4 transition-transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
           <div id="mobile-works-submenu" class="mt-2 space-y-2 pr-4 border-r-2 border-gray-200">
             <div class="py-2">
-              <a href="#digital-products" class="block text-blue-600 font-semibold hover:text-blue-700 text-base transition py-2">تطبيقات رقمية</a>
-              <a href="#motion-graphics" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
-              <a href="#social-designs" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
+              <a href="#digital-products" onclick="scrollToSection('digital-products')" class="block text-blue-600 font-semibold hover:text-blue-700 text-base transition py-2">تطبيقات رقمية</a>
+              <a href="#motion-graphics" onclick="scrollToSection('motion-graphics')" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">موشن جرافيك دعائي</a>
+              <a href="#social-designs" onclick="scrollToSection('social-designs')" class="block text-gray-700 hover:text-blue-600 text-base transition py-2">تصاميم السوشيال ميديا</a>
             </div>
           </div>
         </div>
@@ -1160,60 +1340,48 @@
         }
       }
 
-      // Dark Mode Toggle
-      const mobileThemeToggleBtn = document.getElementById('theme-toggle');
-      const desktopThemeToggleBtn = document.getElementById('desktop-theme-toggle');
-      const htmlElement = document.documentElement;
+      // Simple Dark Mode Toggle
+      function setupThemeToggle() {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
 
-      // Check for saved theme preference or use device preference
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      // Function to update theme toggle buttons
-      function updateThemeButtons(theme) {
-        const icon = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-
-        if (mobileThemeToggleBtn) {
-          mobileThemeToggleBtn.innerHTML = icon;
+        // Set initial theme
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          htmlElement.setAttribute('data-theme', 'dark');
+          if (themeToggleBtn) {
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+          }
+        } else {
+          htmlElement.setAttribute('data-theme', 'light');
+          if (themeToggleBtn) {
+            themeToggleBtn.innerHTML = '<i class="fas fa-adjust"></i>';
+          }
         }
 
-        if (desktopThemeToggleBtn) {
-          desktopThemeToggleBtn.innerHTML = icon;
+        // Add click event listener to theme toggle button
+        if (themeToggleBtn) {
+          themeToggleBtn.addEventListener('click', function() {
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            // Update theme
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Update button icon
+            this.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-adjust"></i>';
+
+            console.log(`Theme switched to ${newTheme} mode`);
+          });
         }
       }
 
-      // Function to toggle theme
-      function toggleTheme() {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-
-        // Update button icons
-        updateThemeButtons(newTheme);
-
-        console.log(`Theme switched to ${newTheme} mode`);
-      }
-
-      // Set initial theme
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        htmlElement.setAttribute('data-theme', 'dark');
-        updateThemeButtons('dark');
-      } else {
-        htmlElement.setAttribute('data-theme', 'light');
-        updateThemeButtons('light');
-      }
-
-      // Toggle theme on mobile button click
-      if (mobileThemeToggleBtn) {
-        mobileThemeToggleBtn.addEventListener('click', toggleTheme);
-      }
-
-      // Toggle theme on desktop button click
-      if (desktopThemeToggleBtn) {
-        desktopThemeToggleBtn.addEventListener('click', toggleTheme);
-      }
+      // Initialize theme toggle
+      setupThemeToggle();
 
       // Back to Top Button
       const backToTopBtn = document.getElementById('backToTop');
@@ -1453,6 +1621,41 @@
         }
 
         console.log('All functionality setup complete');
+
+        // Function to scroll to a section
+        window.scrollToSection = function(sectionId) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+            if (mobileMenu && mobileMenu.classList.contains('translate-x-0')) {
+              mobileMenu.classList.remove('translate-x-0');
+              mobileMenu.classList.add('translate-x-full');
+
+              if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+                setTimeout(() => {
+                  mobileMenuOverlay.classList.add('hidden');
+                }, 300);
+              }
+
+              document.body.style.overflow = '';
+            }
+
+            // Scroll to section with offset for header
+            const headerHeight = 80; // Approximate header height
+            const sectionPosition = section.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: sectionPosition - headerHeight,
+              behavior: 'smooth'
+            });
+          }
+        };
+
+        // Re-initialize theme toggle to ensure it works
+        setupThemeToggle();
       }, 500);
     });
   </script>
