@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Check if running as installed PWA
       const isPWA = window.matchMedia('(display-mode: standalone)').matches ||
-                   (window.navigator.standalone) ||
+                   window.navigator.standalone ||
                    document.referrer.includes('android-app://');
 
       console.log(`Running as PWA: ${isPWA}`);
@@ -265,16 +265,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       console.log(`Device detection: Mobile: ${isMobile}, Smartphone: ${isSmartphone}, Tablet: ${isTablet}, iOS: ${isIOS}, Android: ${isAndroid}, Smart TV: ${isSmartTV}, Desktop: ${isDesktop}`);
 
-      // If running as PWA, hide all install buttons
+      // If running as PWA, make sure all install buttons are hidden
       if (isPWA) {
         console.log('Running as PWA, hiding all install buttons');
-        if (androidInstallBtn) androidInstallBtn.style.display = 'none';
-        if (iosInstallBtn) iosInstallBtn.style.display = 'none';
-        if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
+        this.hideAllInstallButtons(androidInstallBtn, iosInstallBtn, desktopInstallBtn);
         return; // Exit early, no need to setup install buttons in PWA mode
       }
 
-      // Initial button visibility setup for browser mode
+      // Setup initial button visibility based on device type
       this.setupInitialButtonVisibility(androidInstallBtn, iosInstallBtn, desktopInstallBtn, isSmartphone, isIOS, isAndroid, isDesktop, isSmartTV);
 
       // Listen for the beforeinstallprompt event
@@ -293,98 +291,68 @@ document.addEventListener('DOMContentLoaded', () => {
       // Hide buttons when app is installed
       window.addEventListener('appinstalled', (evt) => {
         console.log('App was installed');
-        if (androidInstallBtn) androidInstallBtn.style.display = 'none';
-        if (iosInstallBtn) iosInstallBtn.style.display = 'none';
-        if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
+        this.hideAllInstallButtons(androidInstallBtn, iosInstallBtn, desktopInstallBtn);
       });
 
-      // Setup Android installation
-      this.setupAndroidInstallButton(androidInstallBtn, isAndroid);
-
-      // Setup iOS installation guide
+      // Setup button event listeners
+      this.setupAndroidInstallButton(androidInstallBtn, isAndroid, this.deferredPrompt);
       this.setupIOSInstallButton(iosInstallBtn, isIOS);
-
-      // Setup Desktop and Smart TV installation
-      this.setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone);
+      this.setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone, this.deferredPrompt);
     },
 
+    // Helper method to hide all install buttons
+    hideAllInstallButtons(androidInstallBtn, iosInstallBtn, desktopInstallBtn) {
+      if (androidInstallBtn) androidInstallBtn.style.display = 'none';
+      if (iosInstallBtn) iosInstallBtn.style.display = 'none';
+      if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
+    },
+
+    // Setup initial button visibility based on device type
     setupInitialButtonVisibility(androidInstallBtn, iosInstallBtn, desktopInstallBtn, isSmartphone, isIOS, isAndroid, isDesktop, isSmartTV) {
-      // Setup iOS button visibility - always show on iOS devices
+      // Setup iOS button visibility - show only on iOS devices
       if (iosInstallBtn) {
-        console.log('iOS button found, setting visibility');
-        if (isIOS) {
-          console.log('iOS device detected, showing iOS install button');
-          iosInstallBtn.style.display = 'flex';
-        } else {
-          console.log('Not an iOS device, hiding iOS install button');
-          iosInstallBtn.style.display = 'none';
-        }
-      } else {
-        console.log('iOS button not found in the DOM');
+        iosInstallBtn.style.display = isIOS ? 'flex' : 'none';
+        console.log(`iOS button visibility set to ${isIOS ? 'visible' : 'hidden'}`);
       }
 
-      // Setup Android button visibility - show on Android devices
+      // Setup Android button visibility - show only on Android devices
       if (androidInstallBtn) {
-        console.log('Android button found, setting visibility');
-        if (isAndroid) {
-          console.log('Android device detected, showing Android install button');
-          androidInstallBtn.style.display = 'flex';
-        } else {
-          console.log('Not an Android device, hiding Android install button');
-          androidInstallBtn.style.display = 'none';
-        }
-      } else {
-        console.log('Android button not found in the DOM');
+        androidInstallBtn.style.display = isAndroid ? 'flex' : 'none';
+        console.log(`Android button visibility set to ${isAndroid ? 'visible' : 'hidden'}`);
       }
 
       // Setup Desktop button visibility - show on desktop/TV, hide on smartphones
       if (desktopInstallBtn) {
-        console.log('Desktop button found, setting visibility');
-        if ((isDesktop || isSmartTV) && !isSmartphone) {
-          console.log('Desktop or Smart TV detected, showing install button');
-          desktopInstallBtn.style.display = 'flex';
-        } else {
-          console.log('Not a desktop or Smart TV, hiding install button');
-          desktopInstallBtn.style.display = 'none';
-        }
-      } else {
-        console.log('Desktop button not found in the DOM');
+        const shouldShowDesktopBtn = (isDesktop || isSmartTV) && !isSmartphone;
+        desktopInstallBtn.style.display = shouldShowDesktopBtn ? 'flex' : 'none';
+        console.log(`Desktop button visibility set to ${shouldShowDesktopBtn ? 'visible' : 'hidden'}`);
       }
     },
 
+    // Update button visibility when install prompt is available
     updateButtonVisibility(androidInstallBtn, desktopInstallBtn, isSmartphone, isAndroid, isDesktop, isSmartTV) {
       // Show Android button if on Android device and prompt is available
-      if (androidInstallBtn && isAndroid && !isSmartTV) {
-        console.log('Android device detected, showing Android install button');
+      if (androidInstallBtn && isAndroid) {
         androidInstallBtn.style.display = 'flex';
+        console.log('Install prompt available, showing Android install button');
       }
 
       // Show Desktop button if on desktop/TV and prompt is available
       if (desktopInstallBtn && (isDesktop || isSmartTV) && !isSmartphone) {
-        console.log('Desktop or Smart TV detected, showing desktop install button');
         desktopInstallBtn.style.display = 'flex';
+        console.log('Install prompt available, showing desktop install button');
       }
     },
 
+    // Setup Android installation button
     setupAndroidInstallButton(androidInstallBtn, isAndroid) {
-      if (!androidInstallBtn) {
-        console.log('Android install button not found in the DOM');
-        return;
-      }
-
-      if (!isAndroid) {
-        console.log('Not an Android device, skipping Android button setup');
-        return;
-      }
+      if (!androidInstallBtn || !isAndroid) return;
 
       console.log('Setting up Android install button');
 
       // Remove any previous event listeners to avoid duplicates
       const newAndroidBtn = androidInstallBtn.cloneNode(true);
       androidInstallBtn.parentNode.replaceChild(newAndroidBtn, androidInstallBtn);
-
-      // Make sure the button is visible on Android devices
-      newAndroidBtn.style.display = 'flex';
 
       // Add click event listener to the Android install button
       newAndroidBtn.addEventListener('click', async () => {
@@ -412,20 +380,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     },
 
+    // Setup iOS installation button
     setupIOSInstallButton(iosInstallBtn, isIOS) {
-      if (!iosInstallBtn) {
-        console.log('iOS install button not found in the DOM');
-        return;
-      }
+      if (!iosInstallBtn || !isIOS) return;
 
       console.log('Setting up iOS install button');
 
       // Remove any previous event listeners to avoid duplicates
       const newIOSBtn = iosInstallBtn.cloneNode(true);
       iosInstallBtn.parentNode.replaceChild(newIOSBtn, iosInstallBtn);
-
-      // Always show iOS button in mobile menu for iOS devices
-      newIOSBtn.style.display = isIOS ? 'flex' : 'none';
 
       // Add click event listener to the iOS install button
       newIOSBtn.addEventListener('click', () => {
@@ -434,92 +397,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     },
 
-    setupPWAButtons(androidInstallBtn, iosInstallBtn, desktopInstallBtn, isIOS, isAndroid) {
-      console.log('Setting up PWA-specific buttons');
-
-      // Find the mobile menu container where we'll add our PWA buttons
-      const mobileMenuContainer = document.querySelector('.mt-4.pt-4.border-t.border-gray-200');
-
-      if (!mobileMenuContainer) {
-        console.log('Mobile menu container not found, cannot add PWA buttons');
-        return;
-      }
-
-      // Clear existing install buttons
-      if (androidInstallBtn) androidInstallBtn.style.display = 'none';
-      if (iosInstallBtn) iosInstallBtn.style.display = 'none';
-      if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
-
-      // Create a new container for PWA buttons
-      const pwaButtonsContainer = document.createElement('div');
-      pwaButtonsContainer.className = 'space-y-3 mt-4';
-
-      // Add a heading
-      const heading = document.createElement('h3');
-      heading.className = 'text-lg font-bold text-gray-800 mb-3 text-center';
-      heading.textContent = 'خيارات التطبيق';
-
-      // Create share button
-      const shareButton = document.createElement('button');
-      shareButton.className = 'w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition duration-300 cursor-pointer';
-      shareButton.innerHTML = '<i class="fas fa-share-alt text-xl"></i><span>مشاركة التطبيق</span>';
-      shareButton.addEventListener('click', () => {
-        if (navigator.share) {
-          navigator.share({
-            title: 'منصة وليد علي',
-            text: 'تطبيق منصة وليد علي للتصميم والتسويق الرقمي',
-            url: window.location.href
-          })
-          .then(() => console.log('Shared successfully'))
-          .catch((error) => console.log('Error sharing:', error));
-        } else {
-          alert('مشاركة التطبيق: انسخ هذا الرابط ومشاركته مع أصدقائك\n' + window.location.href);
-        }
-      });
-
-      // Create refresh button
-      const refreshButton = document.createElement('button');
-      refreshButton.className = 'w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition duration-300 cursor-pointer';
-      refreshButton.innerHTML = '<i class="fas fa-sync-alt text-xl"></i><span>تحديث التطبيق</span>';
-      refreshButton.addEventListener('click', () => {
-        window.location.reload();
-      });
-
-      // Add buttons to container
-      pwaButtonsContainer.appendChild(heading);
-      pwaButtonsContainer.appendChild(shareButton);
-      pwaButtonsContainer.appendChild(refreshButton);
-
-      // Replace the existing buttons container with our new one
-      if (mobileMenuContainer.querySelector('.space-y-3')) {
-        mobileMenuContainer.replaceChild(pwaButtonsContainer, mobileMenuContainer.querySelector('.space-y-3'));
-      } else {
-        mobileMenuContainer.appendChild(pwaButtonsContainer);
-      }
-
-      console.log('PWA buttons added successfully');
-    },
-
+    // Setup Desktop and Smart TV installation button
     setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone) {
-      if (!desktopInstallBtn) {
-        console.log('Desktop install button not found in the DOM');
-        return;
-      }
+      if (!desktopInstallBtn || (!isDesktop && !isSmartTV) || isSmartphone) return;
 
       console.log('Setting up desktop and Smart TV install button');
 
       // Remove any previous event listeners to avoid duplicates
       const newDesktopBtn = desktopInstallBtn.cloneNode(true);
       desktopInstallBtn.parentNode.replaceChild(newDesktopBtn, desktopInstallBtn);
-
-      // Show button only on desktop and Smart TV, hide on smartphones
-      if ((isDesktop || isSmartTV) && !isSmartphone) {
-        console.log('Desktop or Smart TV detected, showing install button');
-        newDesktopBtn.style.display = 'flex';
-      } else {
-        console.log('Not a desktop or Smart TV, hiding install button');
-        newDesktopBtn.style.display = 'none';
-      }
 
       // Add click event listener to the desktop install button
       newDesktopBtn.addEventListener('click', async () => {

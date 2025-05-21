@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم العميل</title>
+  <style>
+    body { font-family: Arial; padding: 30px; direction: rtl; background-color: #f9f9f9; }
+    .status-box {
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      width: fit-content;
+      margin-top: 20px;
+    }
+    .activated {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .pending {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+
+<h2>مرحبا بك في لوحة التحكم</h2>
+<div id="statusBox" class="status-box">جاري التحميل...</div>
+
+<script>
+  const username = localStorage.getItem("username");
+  const password = localStorage.getItem("password");
+
+  const API_URL = "1z_LYIS1Y6i-rrS-7IgWsT3Gp5VMkUpXZGRRyq9WFJ0I";
+
+  if (!username || !password) {
+    document.getElementById("statusBox").innerText = "الرجاء تسجيل الدخول أولاً";
+  } else {
+    fetch(`${API_URL}?username=${username}&password=${password}`)
+      .then(res => res.text())
+      .then(text => {
+        const box = document.getElementById("statusBox");
+        if (text === "not_found") {
+          box.innerText = "بيانات غير صحيحة";
+          box.classList.add("pending");
+        } else {
+          const data = JSON.parse(text);
+          if (data.status === "Activated") {
+            box.innerText = "تم تفعيل الإعلان";
+            box.classList.add("activated");
+          } else {
+            box.innerText = "بانتظار تفعيل الإعلان";
+            box.classList.add("pending");
+          }
+        }
+      });
+  }
+</script>
+
+</body>
+</html>
