@@ -295,9 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Setup button event listeners
-      this.setupAndroidInstallButton(androidInstallBtn, isAndroid, this.deferredPrompt);
+      this.setupAndroidInstallButton(androidInstallBtn, isAndroid);
       this.setupIOSInstallButton(iosInstallBtn, isIOS);
-      this.setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone, this.deferredPrompt);
+      this.setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone);
     },
 
     // Helper method to hide all install buttons
