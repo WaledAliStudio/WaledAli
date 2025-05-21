@@ -247,12 +247,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const iosInstallBtn = document.getElementById('ios-install-btn');
       const desktopInstallBtn = document.getElementById('desktop-install-btn');
 
-      // Make sure desktop button is visible for testing
-      if (desktopInstallBtn) {
-        console.log('Desktop install button found');
-      } else {
-        console.error('Desktop install button not found in the DOM');
-      }
+      // Check if running as installed PWA
+      const isPWA = window.matchMedia('(display-mode: standalone)').matches ||
+                   (window.navigator.standalone) ||
+                   document.referrer.includes('android-app://');
+
+      console.log(`Running as PWA: ${isPWA}`);
 
       // Device detection
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -265,17 +265,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       console.log(`Device detection: Mobile: ${isMobile}, Smartphone: ${isSmartphone}, Tablet: ${isTablet}, iOS: ${isIOS}, Android: ${isAndroid}, Smart TV: ${isSmartTV}, Desktop: ${isDesktop}`);
 
-      // For desktop devices and Smart TVs, show the install button immediately with manual instructions
-      if ((isDesktop || isSmartTV) && desktopInstallBtn) {
-        console.log('Desktop or Smart TV device detected, showing install button with manual instructions');
-        desktopInstallBtn.style.display = 'flex';
+      // If running as PWA, hide all install buttons
+      if (isPWA) {
+        console.log('Running as PWA, hiding all install buttons');
+        if (androidInstallBtn) androidInstallBtn.style.display = 'none';
+        if (iosInstallBtn) iosInstallBtn.style.display = 'none';
+        if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
+        return; // Exit early, no need to setup install buttons in PWA mode
       }
 
-      // Hide desktop install button on smartphones
-      if (isSmartphone && desktopInstallBtn) {
-        console.log('Smartphone detected, hiding desktop install button');
-        desktopInstallBtn.style.display = 'none';
-      }
+      // Initial button visibility setup for browser mode
+      this.setupInitialButtonVisibility(androidInstallBtn, iosInstallBtn, desktopInstallBtn, isSmartphone, isIOS, isAndroid, isDesktop, isSmartTV);
 
       // Listen for the beforeinstallprompt event
       window.addEventListener('beforeinstallprompt', (e) => {
@@ -286,121 +286,269 @@ document.addEventListener('DOMContentLoaded', () => {
         // Stash the event so it can be triggered later
         this.deferredPrompt = e;
 
-        // Show the appropriate install button based on device
-        if (isAndroid && !isSmartTV && androidInstallBtn) {
-          console.log('Android device detected, showing Android install button');
-          androidInstallBtn.style.display = 'flex';
-        }
-
-        if ((isDesktop || isSmartTV) && !isSmartphone && desktopInstallBtn) {
-          console.log('Desktop or Smart TV detected, showing desktop install button');
-          desktopInstallBtn.style.display = 'flex';
-        }
-
-        // Always hide desktop install button on smartphones
-        if (isSmartphone && desktopInstallBtn) {
-          console.log('Smartphone detected, hiding desktop install button');
-          desktopInstallBtn.style.display = 'none';
-        }
+        // Update button visibility based on device and prompt availability
+        this.updateButtonVisibility(androidInstallBtn, desktopInstallBtn, isSmartphone, isAndroid, isDesktop, isSmartTV);
       });
 
       // Hide buttons when app is installed
       window.addEventListener('appinstalled', (evt) => {
         console.log('App was installed');
         if (androidInstallBtn) androidInstallBtn.style.display = 'none';
+        if (iosInstallBtn) iosInstallBtn.style.display = 'none';
         if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
       });
 
       // Setup Android installation
-      if (androidInstallBtn) {
-        // Remove any previous event listeners to avoid duplicates
-        const newAndroidBtn = androidInstallBtn.cloneNode(true);
-        androidInstallBtn.parentNode.replaceChild(newAndroidBtn, androidInstallBtn);
-
-        // Add click event listener to the Android install button
-        newAndroidBtn.addEventListener('click', async () => {
-          if (this.deferredPrompt) {
-            console.log('Install prompt available, showing it for Android');
-            this.deferredPrompt.prompt();
-
-            try {
-              const { outcome } = await this.deferredPrompt.userChoice;
-              console.log(`User ${outcome === 'accepted' ? 'accepted' : 'dismissed'} the install prompt`);
-
-              if (outcome === 'accepted') {
-                newAndroidBtn.style.display = 'none';
-              }
-            } catch (error) {
-              console.error('Error with install prompt:', error);
-            }
-
-            this.deferredPrompt = null;
-          } else {
-            console.log('No install prompt available, showing manual instructions for Android');
-            alert('طريقة تثبيت التطبيق على أندرويد:\n1. افتح الموقع من متصفح Google Chrome.\n2. اضغط على زر القائمة (⋮) في أعلى المتصفح.\n3. اختر "إضافة إلى الشاشة الرئيسية" أو "تثبيت التطبيق".');
-          }
-        });
-      }
+      this.setupAndroidInstallButton(androidInstallBtn, isAndroid);
 
       // Setup iOS installation guide
-      if (iosInstallBtn) {
-        // Remove any previous event listeners to avoid duplicates
-        const newIOSBtn = iosInstallBtn.cloneNode(true);
-        iosInstallBtn.parentNode.replaceChild(newIOSBtn, iosInstallBtn);
-
-        // Always show iOS button in mobile menu
-        newIOSBtn.style.display = 'flex';
-
-        newIOSBtn.addEventListener('click', () => {
-          alert('لتثبيت التطبيق على iOS:\n1. اضغط على زر المشاركة (Share) أسفل المتصفح\n2. قم بالتمرير للأسفل واضغط على "إضافة إلى الشاشة الرئيسية"');
-        });
-      }
+      this.setupIOSInstallButton(iosInstallBtn, isIOS);
 
       // Setup Desktop and Smart TV installation
+      this.setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone);
+    },
+
+    setupInitialButtonVisibility(androidInstallBtn, iosInstallBtn, desktopInstallBtn, isSmartphone, isIOS, isAndroid, isDesktop, isSmartTV) {
+      // Setup iOS button visibility - always show on iOS devices
+      if (iosInstallBtn) {
+        console.log('iOS button found, setting visibility');
+        if (isIOS) {
+          console.log('iOS device detected, showing iOS install button');
+          iosInstallBtn.style.display = 'flex';
+        } else {
+          console.log('Not an iOS device, hiding iOS install button');
+          iosInstallBtn.style.display = 'none';
+        }
+      } else {
+        console.log('iOS button not found in the DOM');
+      }
+
+      // Setup Android button visibility - show on Android devices
+      if (androidInstallBtn) {
+        console.log('Android button found, setting visibility');
+        if (isAndroid) {
+          console.log('Android device detected, showing Android install button');
+          androidInstallBtn.style.display = 'flex';
+        } else {
+          console.log('Not an Android device, hiding Android install button');
+          androidInstallBtn.style.display = 'none';
+        }
+      } else {
+        console.log('Android button not found in the DOM');
+      }
+
+      // Setup Desktop button visibility - show on desktop/TV, hide on smartphones
       if (desktopInstallBtn) {
-        console.log('Setting up desktop and Smart TV install button');
-
-        // Remove any previous event listeners to avoid duplicates
-        const newDesktopBtn = desktopInstallBtn.cloneNode(true);
-        desktopInstallBtn.parentNode.replaceChild(newDesktopBtn, desktopInstallBtn);
-
-        // Show button only on desktop and Smart TV, hide on smartphones
+        console.log('Desktop button found, setting visibility');
         if ((isDesktop || isSmartTV) && !isSmartphone) {
           console.log('Desktop or Smart TV detected, showing install button');
-          newDesktopBtn.style.display = 'flex';
+          desktopInstallBtn.style.display = 'flex';
         } else {
           console.log('Not a desktop or Smart TV, hiding install button');
-          newDesktopBtn.style.display = 'none';
+          desktopInstallBtn.style.display = 'none';
         }
-
-        // Add click event listener to the desktop install button
-        newDesktopBtn.addEventListener('click', async () => {
-          if (this.deferredPrompt) {
-            console.log('Install prompt available, showing it for desktop/Smart TV');
-            this.deferredPrompt.prompt();
-
-            try {
-              const { outcome } = await this.deferredPrompt.userChoice;
-              console.log(`User ${outcome === 'accepted' ? 'accepted' : 'dismissed'} the install prompt`);
-
-              if (outcome === 'accepted') {
-                newDesktopBtn.style.display = 'none';
-              }
-            } catch (error) {
-              console.error('Error with install prompt:', error);
-            }
-
-            this.deferredPrompt = null;
-          } else {
-            console.log('No install prompt available, showing manual instructions for desktop/Smart TV');
-            if (isSmartTV) {
-              alert('طريقة تثبيت التطبيق على التلفزيون الذكي:\n1. افتح الموقع من متصفح التلفزيون.\n2. اضغط على زر القائمة أو الإعدادات.\n3. اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".');
-            } else {
-              alert('طريقة تثبيت التطبيق على الكمبيوتر:\n1. افتح الموقع من متصفح Chrome أو Edge.\n2. اضغط على القائمة ⋮ أو أيقونة + في شريط العنوان.\n3. اختر "تثبيت الموقع كتطبيق".');
-            }
-          }
-        });
+      } else {
+        console.log('Desktop button not found in the DOM');
       }
+    },
+
+    updateButtonVisibility(androidInstallBtn, desktopInstallBtn, isSmartphone, isAndroid, isDesktop, isSmartTV) {
+      // Show Android button if on Android device and prompt is available
+      if (androidInstallBtn && isAndroid && !isSmartTV) {
+        console.log('Android device detected, showing Android install button');
+        androidInstallBtn.style.display = 'flex';
+      }
+
+      // Show Desktop button if on desktop/TV and prompt is available
+      if (desktopInstallBtn && (isDesktop || isSmartTV) && !isSmartphone) {
+        console.log('Desktop or Smart TV detected, showing desktop install button');
+        desktopInstallBtn.style.display = 'flex';
+      }
+    },
+
+    setupAndroidInstallButton(androidInstallBtn, isAndroid) {
+      if (!androidInstallBtn) {
+        console.log('Android install button not found in the DOM');
+        return;
+      }
+
+      if (!isAndroid) {
+        console.log('Not an Android device, skipping Android button setup');
+        return;
+      }
+
+      console.log('Setting up Android install button');
+
+      // Remove any previous event listeners to avoid duplicates
+      const newAndroidBtn = androidInstallBtn.cloneNode(true);
+      androidInstallBtn.parentNode.replaceChild(newAndroidBtn, androidInstallBtn);
+
+      // Make sure the button is visible on Android devices
+      newAndroidBtn.style.display = 'flex';
+
+      // Add click event listener to the Android install button
+      newAndroidBtn.addEventListener('click', async () => {
+        console.log('Android install button clicked');
+        if (this.deferredPrompt) {
+          console.log('Install prompt available, showing it for Android');
+          this.deferredPrompt.prompt();
+
+          try {
+            const { outcome } = await this.deferredPrompt.userChoice;
+            console.log(`User ${outcome === 'accepted' ? 'accepted' : 'dismissed'} the install prompt`);
+
+            if (outcome === 'accepted') {
+              newAndroidBtn.style.display = 'none';
+            }
+          } catch (error) {
+            console.error('Error with install prompt:', error);
+          }
+
+          this.deferredPrompt = null;
+        } else {
+          console.log('No install prompt available, showing manual instructions for Android');
+          alert('طريقة تثبيت التطبيق على أندرويد:\n1. افتح الموقع من متصفح Google Chrome.\n2. اضغط على زر القائمة (⋮) في أعلى المتصفح.\n3. اختر "إضافة إلى الشاشة الرئيسية" أو "تثبيت التطبيق".');
+        }
+      });
+    },
+
+    setupIOSInstallButton(iosInstallBtn, isIOS) {
+      if (!iosInstallBtn) {
+        console.log('iOS install button not found in the DOM');
+        return;
+      }
+
+      console.log('Setting up iOS install button');
+
+      // Remove any previous event listeners to avoid duplicates
+      const newIOSBtn = iosInstallBtn.cloneNode(true);
+      iosInstallBtn.parentNode.replaceChild(newIOSBtn, iosInstallBtn);
+
+      // Always show iOS button in mobile menu for iOS devices
+      newIOSBtn.style.display = isIOS ? 'flex' : 'none';
+
+      // Add click event listener to the iOS install button
+      newIOSBtn.addEventListener('click', () => {
+        console.log('iOS install button clicked');
+        alert('لتثبيت التطبيق على iOS:\n1. اضغط على زر المشاركة (Share) أسفل المتصفح\n2. قم بالتمرير للأسفل واضغط على "إضافة إلى الشاشة الرئيسية"');
+      });
+    },
+
+    setupPWAButtons(androidInstallBtn, iosInstallBtn, desktopInstallBtn, isIOS, isAndroid) {
+      console.log('Setting up PWA-specific buttons');
+
+      // Find the mobile menu container where we'll add our PWA buttons
+      const mobileMenuContainer = document.querySelector('.mt-4.pt-4.border-t.border-gray-200');
+
+      if (!mobileMenuContainer) {
+        console.log('Mobile menu container not found, cannot add PWA buttons');
+        return;
+      }
+
+      // Clear existing install buttons
+      if (androidInstallBtn) androidInstallBtn.style.display = 'none';
+      if (iosInstallBtn) iosInstallBtn.style.display = 'none';
+      if (desktopInstallBtn) desktopInstallBtn.style.display = 'none';
+
+      // Create a new container for PWA buttons
+      const pwaButtonsContainer = document.createElement('div');
+      pwaButtonsContainer.className = 'space-y-3 mt-4';
+
+      // Add a heading
+      const heading = document.createElement('h3');
+      heading.className = 'text-lg font-bold text-gray-800 mb-3 text-center';
+      heading.textContent = 'خيارات التطبيق';
+
+      // Create share button
+      const shareButton = document.createElement('button');
+      shareButton.className = 'w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition duration-300 cursor-pointer';
+      shareButton.innerHTML = '<i class="fas fa-share-alt text-xl"></i><span>مشاركة التطبيق</span>';
+      shareButton.addEventListener('click', () => {
+        if (navigator.share) {
+          navigator.share({
+            title: 'منصة وليد علي',
+            text: 'تطبيق منصة وليد علي للتصميم والتسويق الرقمي',
+            url: window.location.href
+          })
+          .then(() => console.log('Shared successfully'))
+          .catch((error) => console.log('Error sharing:', error));
+        } else {
+          alert('مشاركة التطبيق: انسخ هذا الرابط ومشاركته مع أصدقائك\n' + window.location.href);
+        }
+      });
+
+      // Create refresh button
+      const refreshButton = document.createElement('button');
+      refreshButton.className = 'w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition duration-300 cursor-pointer';
+      refreshButton.innerHTML = '<i class="fas fa-sync-alt text-xl"></i><span>تحديث التطبيق</span>';
+      refreshButton.addEventListener('click', () => {
+        window.location.reload();
+      });
+
+      // Add buttons to container
+      pwaButtonsContainer.appendChild(heading);
+      pwaButtonsContainer.appendChild(shareButton);
+      pwaButtonsContainer.appendChild(refreshButton);
+
+      // Replace the existing buttons container with our new one
+      if (mobileMenuContainer.querySelector('.space-y-3')) {
+        mobileMenuContainer.replaceChild(pwaButtonsContainer, mobileMenuContainer.querySelector('.space-y-3'));
+      } else {
+        mobileMenuContainer.appendChild(pwaButtonsContainer);
+      }
+
+      console.log('PWA buttons added successfully');
+    },
+
+    setupDesktopInstallButton(desktopInstallBtn, isDesktop, isSmartTV, isSmartphone) {
+      if (!desktopInstallBtn) {
+        console.log('Desktop install button not found in the DOM');
+        return;
+      }
+
+      console.log('Setting up desktop and Smart TV install button');
+
+      // Remove any previous event listeners to avoid duplicates
+      const newDesktopBtn = desktopInstallBtn.cloneNode(true);
+      desktopInstallBtn.parentNode.replaceChild(newDesktopBtn, desktopInstallBtn);
+
+      // Show button only on desktop and Smart TV, hide on smartphones
+      if ((isDesktop || isSmartTV) && !isSmartphone) {
+        console.log('Desktop or Smart TV detected, showing install button');
+        newDesktopBtn.style.display = 'flex';
+      } else {
+        console.log('Not a desktop or Smart TV, hiding install button');
+        newDesktopBtn.style.display = 'none';
+      }
+
+      // Add click event listener to the desktop install button
+      newDesktopBtn.addEventListener('click', async () => {
+        console.log('Desktop install button clicked');
+        if (this.deferredPrompt) {
+          console.log('Install prompt available, showing it for desktop/Smart TV');
+          this.deferredPrompt.prompt();
+
+          try {
+            const { outcome } = await this.deferredPrompt.userChoice;
+            console.log(`User ${outcome === 'accepted' ? 'accepted' : 'dismissed'} the install prompt`);
+
+            if (outcome === 'accepted') {
+              newDesktopBtn.style.display = 'none';
+            }
+          } catch (error) {
+            console.error('Error with install prompt:', error);
+          }
+
+          this.deferredPrompt = null;
+        } else {
+          console.log('No install prompt available, showing manual instructions for desktop/Smart TV');
+          if (isSmartTV) {
+            alert('طريقة تثبيت التطبيق على التلفزيون الذكي:\n1. افتح الموقع من متصفح التلفزيون.\n2. اضغط على زر القائمة أو الإعدادات.\n3. اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".');
+          } else {
+            alert('طريقة تثبيت التطبيق على الكمبيوتر:\n1. افتح الموقع من متصفح Chrome أو Edge.\n2. اضغط على القائمة ⋮ أو أيقونة + في شريط العنوان.\n3. اختر "تثبيت الموقع كتطبيق".');
+          }
+        }
+      });
     }
   };
 

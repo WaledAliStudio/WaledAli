@@ -641,11 +641,11 @@
         <div class="mt-4 pt-4 border-t border-gray-200">
           <h3 class="text-lg font-bold text-gray-800 mb-3 text-center">تثبيت التطبيق</h3>
           <div class="space-y-3">
-            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition duration-300">
+            <button id="android-install-btn" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition duration-300 cursor-pointer">
               <i class="fab fa-android text-xl"></i>
               <span>تثبيت على أندرويد</span>
             </button>
-            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition duration-300">
+            <button id="ios-install-btn" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition duration-300 cursor-pointer">
               <i class="fab fa-apple text-xl"></i>
               <span>تثبيت على iOS</span>
             </button>
@@ -1200,6 +1200,14 @@
             </div>
           </div>
         </div>
+        <!-- Desktop & Smart TV Install Button (Centered) - Hidden on mobile -->
+        <div class="hidden md:flex justify-center mt-6 mb-8">
+          <button id="desktop-install-btn" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300 shadow-lg cursor-pointer">
+            <i class="fas fa-download"></i>
+            <span>تثبيت التطبيق على الكمبيوتر والتلفزيون الذكي</span>
+          </button>
+        </div>
+
         <div class="border-t border-gray-800 mt-12 pt-8 text-center">
           <p>&copy; 2025 وليد علي استديو. جميع الحقوق محفوظة.</p>
         </div>
