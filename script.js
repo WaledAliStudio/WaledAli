@@ -1,4 +1,4 @@
-// Main JavaScript for وليد علي استديو PWA
+// Main JavaScript for منصة رفق PWA
 
 // Register Service Worker
 if ('serviceWorker' in navigator) {
