@@ -3,7 +3,6 @@
   "short_name": "رفق",
   "description": "منصة رفق - لخدمات التسويق الرقمي المتكاملة",
   "start_url": "/",
-  "scope": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
@@ -22,14 +21,14 @@
       "purpose": "any maskable"
     }
   ],
-  "prefer_related_applications": false,
-  "categories": ["business", "marketing", "design"],
-  "lang": "ar",
   "dir": "rtl",
+  "lang": "ar",
+  "prefer_related_applications": false,
+  "categories": ["business", "marketing", "social"],
   "screenshots": [
     {
       "src": "logo.png",
-      "sizes": "1920x1080",
+      "sizes": "1280x720",
       "type": "image/png"
     }
   ],
