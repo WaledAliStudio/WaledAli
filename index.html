@@ -342,6 +342,41 @@
       padding: 0;
     }
 
+    /* Custom Section Spacing */
+    #hero {
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+    }
+
+    @media (min-width: 768px) {
+      #hero {
+        padding-top: 10rem;
+        padding-bottom: 6rem;
+      }
+    }
+
+    #features {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    @media (min-width: 768px) {
+      #features {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+      }
+    }
+
+    #features h2 {
+      margin-bottom: 4rem;
+    }
+
+    @media (min-width: 768px) {
+      #features h2 {
+        margin-bottom: 6rem;
+      }
+    }
+
     /* Fix container width issues */
     .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl {
       width: 100%;
@@ -453,26 +488,37 @@
     }
 
     /* Submenu Animation Styles */
+    .group:hover .transition-transform {
+      transform: rotate(180deg);
+    }
+
+    .group:hover .transform {
+      transform: scale(1);
+    }
+
+    .group:hover .opacity-0 {
+      opacity: 1;
+    }
+
+    .group:hover .invisible {
+      visibility: visible;
+    }
+
+    /* Mobile Submenu Animation */
     #mobile-works-submenu {
+      max-height: 0;
+      overflow: hidden;
       transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
       opacity: 0;
     }
 
-    #mobile-works-submenu.submenu-open {
+    #mobile-works-submenu.active {
+      max-height: 500px;
       opacity: 1;
     }
 
-    /* Icon Rotation */
     .rotate-180 {
       transform: rotate(180deg);
-    }
-
-    /* Mobile works submenu animation */
-    #mobile-works-submenu {
-      display: block !important;
-      max-height: none !important;
-      opacity: 1 !important;
-      visibility: visible !important;
     }
 
     /* Light Mode Specific Text Colors */
@@ -910,9 +956,9 @@
             <div class="relative group">
               <button class="text-gray-600 hover:text-blue-600 transition flex items-center gap-1 focus:outline-none text-base md:text-lg" id="works-menu-btn">
                 الأعمال
-                <svg class="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                <svg class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
-              <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-50" style="visibility: visible;">
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 z-50">
                 <a href="digital.html#motion-graphics" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">موشن جرافيك دعائي</a>
                 <a href="digital.html#social-designs" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تصاميم السوشيال ميديا</a>
                 <a href="digital.html#digital-products" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition">تطبيقات رقمية</a>
@@ -996,9 +1042,9 @@
   <!-- Main Content -->
   <main id="main-content" role="main">
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-white" id="hero">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+    <section class="pt-32 md:pt-40 pb-16 md:pb-24 bg-white" id="hero">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div class="space-y-8" data-aos="fade-left">
             <h1 class="text-5xl font-bold text-gray-900 leading-tight">
               <span class="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse">منصة رفق</span>
@@ -1047,8 +1093,8 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-6xl mx-auto">
+    <section class="py-12 md:py-16 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div class="p-6 rounded-xl bg-white custom-shadow hover-scale" data-aos="fade-up">
             <div class="text-4xl font-bold text-blue-600 mb-2">
@@ -1079,10 +1125,10 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-20 bg-gray-50" id="features">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">خدماتنا</h2>
-        <div class="grid md:grid-cols-3 gap-12">
+    <section class="py-20 md:py-32 bg-gray-50" id="features">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 md:mb-24" data-aos="fade-up">خدماتنا</h2>
+        <div class="grid md:grid-cols-3 gap-8 md:gap-12">
           <div class="bg-gray-50 p-8 rounded-xl custom-shadow hover-scale" data-aos="fade-up" data-aos-delay="100">
             <div class="text-blue-600 text-5xl mb-6">
               <i class="fas fa-search"></i>
@@ -1508,6 +1554,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="pwa-install.js"></script>
   <script>
     // Dark Mode Handler - تم نقل هذا الكود إلى ملف script.js
 
@@ -1790,6 +1837,56 @@
 
     // تم نقل كود القائمة المتنقلة إلى mobileMenuHandler
 
+    // Desktop Works Menu Handler
+    const worksMenuHandler = {
+      init() {
+        const worksMenuBtn = document.getElementById('works-menu-btn');
+        const worksSubmenu = worksMenuBtn?.nextElementSibling;
+        const arrowIcon = worksMenuBtn?.querySelector('svg');
+
+        if (worksMenuBtn && worksSubmenu) {
+          worksMenuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            worksSubmenu.classList.toggle('opacity-0');
+            worksSubmenu.classList.toggle('invisible');
+            worksSubmenu.classList.toggle('scale-95');
+            worksSubmenu.classList.toggle('scale-100');
+            arrowIcon?.classList.toggle('rotate-180');
+          });
+
+          // Close submenu when clicking outside
+          document.addEventListener('click', (e) => {
+            if (!worksMenuBtn.contains(e.target) && !worksSubmenu.contains(e.target)) {
+              worksSubmenu.classList.add('opacity-0', 'invisible', 'scale-95');
+              worksSubmenu.classList.remove('scale-100');
+              arrowIcon?.classList.remove('rotate-180');
+            }
+          });
+        }
+      }
+    };
+
+    // Mobile Works Menu Handler
+    const mobileWorksMenuHandler = {
+      init() {
+        const mobileWorksBtn = document.querySelector('.relative.mb-6 > div:first-child');
+        const mobileWorksSubmenu = document.getElementById('mobile-works-submenu');
+        const arrowIcon = mobileWorksBtn?.querySelector('svg');
+
+        if (mobileWorksBtn && mobileWorksSubmenu) {
+          mobileWorksBtn.addEventListener('click', () => {
+            mobileWorksSubmenu.classList.toggle('active');
+            arrowIcon?.classList.toggle('rotate-180');
+          });
+        }
+      }
+    };
+
+    // Initialize menu handlers
+    document.addEventListener('DOMContentLoaded', () => {
+      worksMenuHandler.init();
+      mobileWorksMenuHandler.init();
+    });
   </script>
 </body>
 </html>
