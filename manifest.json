@@ -4,8 +4,8 @@
   "description": "منصة رفق - لخدمات التسويق الرقمي المتكاملة",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "orientation": "portrait",
   "icons": [
     {
@@ -32,7 +32,14 @@
       "type": "image/png"
     }
   ],
-  "splash_pages": null,
+  "splash_pages": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
   "shortcuts": [
     {
       "name": "خدماتنا",
