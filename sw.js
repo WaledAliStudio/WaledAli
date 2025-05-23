@@ -9,6 +9,7 @@ const urlsToCache = [
   '/logo-maskable.png',
   '/screenshot1.png',
   '/screenshot2.png',
+  '/offline.html',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
@@ -90,4 +91,71 @@ self.addEventListener('fetch', (event) => {
         });
       })
   );
-}); 
+});
+
+// معالجة Background Sync
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-data') {
+    event.waitUntil(syncData());
+  }
+});
+
+// معالجة Periodic Background Sync
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'periodic-sync') {
+    event.waitUntil(periodicSync());
+  }
+});
+
+// معالجة Push Notifications
+self.addEventListener('push', (event) => {
+  const options = {
+    body: event.data.text(),
+    icon: 'logo-any.png',
+    badge: 'logo-any.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    },
+    actions: [
+      {
+        action: 'explore',
+        title: 'عرض التفاصيل',
+        icon: 'logo-any.png'
+      }
+    ]
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('منصة رفق', options)
+  );
+});
+
+// معالجة النقر على الإشعارات
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('/')
+  );
+});
+
+// دالة مزامنة البيانات
+async function syncData() {
+  try {
+    // هنا يمكنك إضافة كود مزامنة البيانات
+    console.log('تمت مزامنة البيانات');
+  } catch (error) {
+    console.error('خطأ في مزامنة البيانات:', error);
+  }
+}
+
+// دالة المزامنة الدورية
+async function periodicSync() {
+  try {
+    // هنا يمكنك إضافة كود المزامنة الدورية
+    console.log('تمت المزامنة الدورية');
+  } catch (error) {
+    console.error('خطأ في المزامنة الدورية:', error);
+  }
+} 

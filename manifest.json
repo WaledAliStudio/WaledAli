@@ -1,4 +1,5 @@
 {
+  "id": "rafq-platform",
   "name": "منصة رفق",
   "short_name": "رفق",
   "description": "منصة رفق - لخدمات التسويق الرقمي المتكاملة",
@@ -70,7 +71,7 @@
   "prefer_related_applications": false,
   "categories": ["business", "marketing", "social"],
   "related_applications": [],
-  "iarc_rating_id": "",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "share_target": {
     "action": "/share-target/",
     "method": "GET",
@@ -84,5 +85,22 @@
   "display_override": ["window-controls-overlay"],
   "edge_side_panel": {
     "preferred_width": 400
-  }
+  },
+  "launch_handler": {
+    "client_mode": ["auto", "focus-existing"]
+  },
+  "scope_extensions": [
+    "https://rafq.com",
+    "https://www.rafq.com"
+  ],
+  "background_sync": {
+    "periodic_sync": {
+      "min_interval": 86400
+    }
+  },
+  "permissions": [
+    "background-sync",
+    "periodic-background-sync",
+    "notifications"
+  ]
 }
