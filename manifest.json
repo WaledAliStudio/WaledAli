@@ -10,25 +10,25 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logo-any.png",
+      "src": "/images/logo-any.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "logo-maskable.png",
+      "src": "/images/logo-maskable.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "logo-any.png",
+      "src": "/images/logo-any.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "logo-maskable.png",
+      "src": "/images/logo-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -36,14 +36,14 @@
   ],
   "screenshots": [
     {
-      "src": "screenshot1.png",
+      "src": "/images/screenshot1.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "الصفحة الرئيسية"
     },
     {
-      "src": "screenshot2.png",
+      "src": "/images/screenshot2.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
@@ -56,14 +56,14 @@
       "short_name": "خدمات",
       "description": "استعرض خدماتنا",
       "url": "/#features",
-      "icons": [{ "src": "logo-any.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/logo-any.png", "sizes": "192x192" }]
     },
     {
       "name": "تواصل معنا",
       "short_name": "تواصل",
       "description": "تواصل معنا مباشرة",
       "url": "/#contact",
-      "icons": [{ "src": "logo-any.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/logo-any.png", "sizes": "192x192" }]
     }
   ],
   "dir": "rtl",
