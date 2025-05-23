@@ -90,8 +90,18 @@
     "client_mode": ["auto", "focus-existing"]
   },
   "scope_extensions": [
-    "https://rafq.com",
-    "https://www.rafq.com"
+    {
+      "origin": "https://rafq.com",
+      "has_origin_wildcard": false
+    },
+    {
+      "origin": "https://www.rafq.com",
+      "has_origin_wildcard": false
+    },
+    {
+      "origin": "https://api.rafq.com",
+      "has_origin_wildcard": false
+    }
   ],
   "background_sync": {
     "periodic_sync": {
