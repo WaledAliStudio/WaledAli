@@ -9,35 +9,44 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "logo-any.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "logo.png",
+      "src": "logo-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "logo-any.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "logo-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "dir": "rtl",
-  "lang": "ar",
-  "prefer_related_applications": false,
-  "categories": ["business", "marketing", "social"],
   "screenshots": [
     {
-      "src": "logo.png",
+      "src": "screenshot1.png",
       "sizes": "1280x720",
-      "type": "image/png"
-    }
-  ],
-  "splash_pages": [
-    {
-      "src": "logo.png",
-      "sizes": "512x512",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "الصفحة الرئيسية"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "خدماتنا"
     }
   ],
   "shortcuts": [
@@ -46,16 +55,20 @@
       "short_name": "خدمات",
       "description": "استعرض خدماتنا",
       "url": "/#features",
-      "icons": [{ "src": "logo.png", "sizes": "192x192" }]
+      "icons": [{ "src": "logo-any.png", "sizes": "192x192" }]
     },
     {
       "name": "تواصل معنا",
       "short_name": "تواصل",
       "description": "تواصل معنا مباشرة",
       "url": "/#contact",
-      "icons": [{ "src": "logo.png", "sizes": "192x192" }]
+      "icons": [{ "src": "logo-any.png", "sizes": "192x192" }]
     }
   ],
+  "dir": "rtl",
+  "lang": "ar",
+  "prefer_related_applications": false,
+  "categories": ["business", "marketing", "social"],
   "related_applications": [],
   "iarc_rating_id": "",
   "share_target": {
@@ -66,5 +79,10 @@
       "text": "text",
       "url": "url"
     }
+  },
+  "scope": "/",
+  "display_override": ["window-controls-overlay"],
+  "edge_side_panel": {
+    "preferred_width": 400
   }
 }

@@ -5,7 +5,10 @@ const urlsToCache = [
   '/script.js',
   '/pwa-install.js',
   '/manifest.json',
-  '/logo.png',
+  '/logo-any.png',
+  '/logo-maskable.png',
+  '/screenshot1.png',
+  '/screenshot2.png',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
@@ -21,27 +24,36 @@ self.addEventListener('install', (event) => {
         console.log('تم فتح الكاش');
         return cache.addAll(urlsToCache);
       })
+      .then(() => self.skipWaiting())
   );
 });
 
 // تفعيل Service Worker
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('تم حذف الكاش القديم');
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    Promise.all([
+      // تحديث العملاء
+      self.clients.claim(),
+      // حذف الكاش القديم
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME) {
+              console.log('تم حذف الكاش القديم');
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+    ])
   );
 });
 
 // معالجة الطلبات
 self.addEventListener('fetch', (event) => {
+  // تجاهل طلبات POST
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -70,7 +82,12 @@ self.addEventListener('fetch', (event) => {
 
             return response;
           }
-        );
+        ).catch(() => {
+          // في حالة فشل الاتصال، إرجاع صفحة offline
+          if (event.request.mode === 'navigate') {
+            return caches.match('/offline.html');
+          }
+        });
       })
   );
 }); 
